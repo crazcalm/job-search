@@ -6,4 +6,4 @@ CREATE TABLE contacts(
     email               TEXT NOT NULL DEFAULT "",
     phone               TEXT NOT NULL DEFAULT "",
     description         TEXT NOT NULL DEFAULT ""
-)
+);

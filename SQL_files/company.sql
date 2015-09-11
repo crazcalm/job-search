@@ -5,4 +5,4 @@ CREATE TABLE company(
     address     TEXT NOT NULL DEFAULT "UNKNOWN",
     website     TEXT NOT NULL DEFAULT "UNKNOWN",
     phone       TEXT NOT NULL DEFAULT "UNKNOWN"
-)
+);

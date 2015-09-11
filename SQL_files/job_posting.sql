@@ -8,4 +8,4 @@ CREATE TABLE job_posting(
     company             TEXT NOT NULL DEFAULT "",
     recruiter           TEXT NOT NULL DEFAULT "",
     contact             TEXT NOT NULL DEFAULT ""
-)
+);

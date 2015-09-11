@@ -6,4 +6,4 @@ CREATE TABLE recruiters(
     email               TEXT NOT NULL DEFAULT "",
     phone               TEXT NOT NULL DEFAULT "",
     company             TEXT NOT NULL DEFAULT ""
-)
+);
