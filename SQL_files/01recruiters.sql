@@ -6,7 +6,5 @@ CREATE TABLE recruiters(
     email               TEXT NOT NULL DEFAULT "",
     phone               TEXT NOT NULL DEFAULT "",
     companyId           INTEGER,
-    job_postingId       INTEGER,
-    FOREIGN KEY (companyId) REFERENCES company(id) ON DEFAULT CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (job_postingId) REFERENCES job_posting(id) ON DEFAULT CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (companyId) REFERENCES company(id) ON DELETE CASCADE ON UPDATE CASCADE
 );

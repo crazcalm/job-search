@@ -23,7 +23,9 @@ class SQL:
         assert os.path.isdir(path_to_dir)
 
         sql_files = [file for file in os.listdir(path_to_dir) if file.endswith(".sql")]
+        sql_files.sort()
         for file in sql_files:
+            print("current file: ", file)
             self._add_data_to_db(os.path.join(path_to_dir, file))
 
     def add_data_from_file(self, path):

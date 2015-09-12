@@ -1,8 +1,0 @@
-DROP TABLE IF EXISTS company;
-CREATE TABLE company(
-    id          INTEGER PRIMARY KEY,
-    name        TEXT NOT NULL DEFAULT "UNKNOWN",
-    address     TEXT NOT NULL DEFAULT "UNKNOWN",
-    website     TEXT NOT NULL DEFAULT "UNKNOWN",
-    phone       TEXT NOT NULL DEFAULT "UNKNOWN"
-);

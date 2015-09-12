@@ -6,6 +6,6 @@ CREATE TABLE contacts(
     email               TEXT NOT NULL DEFAULT "",
     phone               TEXT NOT NULL DEFAULT "",
     description         TEXT NOT NULL DEFAULT "",
-    job_postingId       INTEGER,
-    FOREIGN KEY (job_postingId) REFERENCES job_posting(id) ON DELETE CASCADE ON UPDATE CASCADE
+    companyId           INTEGER,
+    FOREIGN KEY (companyId) REFERENCES company(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
