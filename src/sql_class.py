@@ -42,6 +42,10 @@ class SQL:
 
 
 if __name__ == "__main__":
-    test = SQL(":memory:")
+    #test = SQL(":memory:")
+    test = SQL(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "SQL_files",
+                                            "test.db")))
     sql_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "SQL_files"))
+    play_data = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "play_data"))
     test.create_tables(sql_dir)
+    test.add_data_from_dir(play_data)

@@ -9,6 +9,6 @@ CREATE TABLE job_posting(
     recruiterId         INTEGER,
     contactId           INTEGER,
     FOREIGN KEY(companyId)      REFERENCES company(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(recruiterId)    REFERENCES recruiter(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(contactId)      REFERENCES contact(id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY(recruiterId)    REFERENCES recruiters(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(contactId)      REFERENCES contacts(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
