@@ -5,7 +5,10 @@ CREATE TABLE job_posting(
     date_applied        TEXT NOT NULL DEFAULT "",
     description         TEXT NOT NULL DEFAULT "",
     interviewed         TEXT NOT NULL DEFAULT "",
-    company             TEXT NOT NULL DEFAULT "",
-    recruiter           TEXT NOT NULL DEFAULT "",
-    contact             TEXT NOT NULL DEFAULT ""
+    companyId           INTEGER,
+    recruiterId         INTEGER,
+    contactId           INTEGER,
+    FOREIGN KEY(companyId)      REFERENCES company(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(recruiterId)    REFERENCES recruiter(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(contactId)      REFERENCES contact(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
