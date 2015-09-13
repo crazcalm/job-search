@@ -16,10 +16,15 @@ class SQL:
 
         subprocess.call("sqlite3 {} < {}".format(self.db_name, file_path), shell=True)
 
-    def _add_data_from_dir(self, path_to_dir):
+    def _add_data_from_dir(self, path_to_dir, data=False):
         assert os.path.isdir(path_to_dir)
 
-        sql_files = [file for file in os.listdir(path_to_dir) if file.endswith(".sql")]
+        if data:
+            sql_files = [file for file in os.listdir(path_to_dir) if file.endswith(".sql") and
+                         "data" in file]
+        else:
+            sql_files = [file for file in os.listdir(path_to_dir) if file.endswith(".sql") and
+                         "data" not in file]
         sql_files.sort()
 
         # Saving current dir and then changing to new dir
@@ -36,8 +41,8 @@ class SQL:
     def add_data_from_file(self, path):
         self._add_data_to_db(path)
 
-    def add_data_from_dir(self, path):
-        self._add_data_from_dir(path)
+    def add_data_from_dir(self, path, data=False):
+        self._add_data_from_dir(path, data=data)
 
     def create_tables(self, path_to_dir):
         self._add_data_from_dir(path_to_dir)
@@ -50,6 +55,6 @@ if __name__ == "__main__":
     test = SQL(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "SQL_files",
                                             "test.db")))
     sql_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "SQL_files"))
-    play_data = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "play_data"))
+    play_data = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "SQL_files"))
     test.create_tables(sql_dir)
-    test.add_data_from_dir(play_data)
+    test.add_data_from_dir(play_data, data=True)
