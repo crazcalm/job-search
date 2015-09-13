@@ -1,3 +1,4 @@
+PRAGMA foreign_keys = ON;
 INSERT INTO recruiters (first_name, last_name, email, phone, companyId) VALUES ("Recuiter1",
 "1Recruiter", "recruiter1@gmail.com", "111-111-1111", 1);
 INSERT INTO recruiters (first_name, last_name, email, phone, companyId) VALUES ("Recuiter2",

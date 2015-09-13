@@ -11,6 +11,10 @@ class SQL:
         self.db_path = os.path.abspath(db_path)
         self.con = sqlite.connect(db_path)
 
+        # enable foreign keys
+        self.con.execute("""PRAGMA foreign_keys = ON""")
+        #self.con.commit()
+
     def _add_data_to_db(self, file_path):
         assert os.path.isfile(file_path)
 

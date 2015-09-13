@@ -1,3 +1,4 @@
+PRAGMA foreign_keys = ON;
 INSERT INTO company (name, address, website, phone) VALUES ("Google", "Somewhere in Cali",
 "Google.com", "555-555-5555");
 INSERT INTO company (name, address, website, phone) VALUES ("Yahoo", "Also in Cali",
