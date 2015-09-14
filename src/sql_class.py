@@ -3,6 +3,7 @@ import os
 import subprocess
 
 from base_classes import PracticalSQL
+from constants import TEST_DB, SQL_FILES
 
 
 class SQL(PracticalSQL):
@@ -54,9 +55,6 @@ class SQL(PracticalSQL):
 
 
 if __name__ == "__main__":
-    test = SQL(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "SQL_files",
-                                            "test.db")))
-    sql_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "SQL_files"))
-    play_data = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "SQL_files"))
-    test.create_tables(sql_dir)
-    test.add_data_from_dir(play_data, data=True)
+    test = SQL(TEST_DB)
+    test.create_tables(SQL_FILES)
+    test.add_data_from_dir(SQL_FILES, data=True)
