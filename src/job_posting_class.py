@@ -1,7 +1,7 @@
-from sql_class import SQL
+from base_classes import SQLModule
 
 
-class JobPosting:
+class JobPosting(SQLModule):
     def __int__(self, uid="", link="", date_applied="", description="", interviewed="",
                 company_uid="", recruiter_uid="", contact_uid=""):
         self.uid = uid

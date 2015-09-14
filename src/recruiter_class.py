@@ -1,4 +1,3 @@
-from sql_class import SQL
 from .contact_class import Contact
 
 

@@ -1,7 +1,7 @@
-from sql_class import SQL
+from base_classes import SQLModule
 
 
-class Contact:
+class Contact(SQLModule):
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
                  company_uid=None):
         self.uid = uid

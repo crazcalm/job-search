@@ -1,6 +1,8 @@
 import os
 import sqlite3 as sqlite
 
+from .constants import TEST_DB
+
 
 class PracticalSQL:
     def __init__(self, db_path):
@@ -16,3 +18,11 @@ class PracticalSQL:
 
     def close(self):
         self.con.close()
+
+
+class SQLModule:
+    def __init__(self):
+        self.db = None
+
+    def init_db(self, db_path):
+        self.db = PracticalSQL(TEST_DB)
