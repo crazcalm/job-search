@@ -1,6 +1,6 @@
 class Company:
-    def __init__(self, id="", name="", address="", website="", phone=""):
-        self.id = id
+    def __init__(self, uid="", name="", address="", website="", phone=""):
+        self.id = uid
         self.name = name
         self.address = address
         self.website = website
