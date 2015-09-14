@@ -1,3 +1,6 @@
+from sql_class import SQL
+
+
 class Recruiter:
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
                  company_uid=None):
@@ -7,4 +10,4 @@ class Recruiter:
         self.email = email
         self.phone = phone
         self.description = description
-        self.company_uid = company_id
+        self.company_uid = company_uid

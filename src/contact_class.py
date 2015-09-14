@@ -1,3 +1,6 @@
+from sql_class import SQL
+
+
 class Contact:
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
                  company_uid=None):

@@ -1,3 +1,6 @@
+from sql_class import SQL
+
+
 class JobPosting:
     def __int__(self, uid="", link="", date_applied="", description="", interviewed="",
                 company_uid="", recruiter_uid="", contact_uid=""):

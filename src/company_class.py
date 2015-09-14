@@ -1,3 +1,6 @@
+from sql_class import SQL
+
+
 class Company:
     def __init__(self, uid="", name="", address="", website="", phone=""):
         self.uid = uid
