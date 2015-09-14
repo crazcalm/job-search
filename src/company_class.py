@@ -1,6 +1,4 @@
-from sql_class import SQL
-from constants import TEST_DB
-from base_classes import SQLModule
+from src.base_classes import SQLModule
 
 
 class Company(SQLModule):

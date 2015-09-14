@@ -1,7 +1,7 @@
 import os
 import sqlite3 as sqlite
 
-from .constants import TEST_DB
+from src.constants import TEST_DB
 
 
 class PracticalSQL:

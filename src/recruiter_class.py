@@ -1,4 +1,4 @@
-from .contact_class import Contact
+from src.contact_class import Contact
 
 
 # Note: a recruiter can have many job postings

@@ -1,4 +1,4 @@
-from base_classes import SQLModule
+from src.base_classes import SQLModule
 
 
 class JobPosting(SQLModule):
