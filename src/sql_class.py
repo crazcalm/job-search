@@ -4,6 +4,13 @@ import subprocess
 
 
 class SQL:
+    singleton = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls.singleton:
+            cls.singleton = object.__new__(SQL)
+        return cls.singleton
+
     def __init__(self, db_path):
         # Note: the path might not exist yet...
         assert ";" not in db_path
@@ -13,7 +20,7 @@ class SQL:
 
         # enable foreign keys
         self.con.execute("""PRAGMA foreign_keys = ON""")
-        #self.con.commit()
+        self.con.commit()
 
     def _add_data_to_db(self, file_path):
         assert os.path.isfile(file_path)
