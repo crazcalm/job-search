@@ -8,3 +8,11 @@ class Company:
         self.address = address
         self.website = website
         self.phone = phone
+
+    def __str__(self):
+        return """
+        uid: {}
+        name: {}
+        address: {}
+        website: {}
+        phone: {}""".format(self.uid, self.name, self.address, self.website, self.phone)

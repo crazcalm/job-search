@@ -2,8 +2,10 @@ import sqlite3 as sqlite
 import os
 import subprocess
 
+from base_classes import PracticalSQL
 
-class SQL:
+
+class SQL(PracticalSQL):
     singleton = None
 
     def __new__(cls, *args, **kwargs):
@@ -12,15 +14,7 @@ class SQL:
         return cls.singleton
 
     def __init__(self, db_path):
-        # Note: the path might not exist yet...
-        assert ";" not in db_path
-        self.db_dir_path, self.db_name = os.path.split(db_path)
-        self.db_path = os.path.abspath(db_path)
-        self.con = sqlite.connect(db_path)
-
-        # enable foreign keys
-        self.con.execute("""PRAGMA foreign_keys = ON""")
-        self.con.commit()
+        super().__init__(db_path)
 
     def _add_data_to_db(self, file_path):
         assert os.path.isfile(file_path)
@@ -57,9 +51,6 @@ class SQL:
 
     def create_tables(self, path_to_dir):
         self._add_data_from_dir(path_to_dir)
-
-    def close(self):
-        self.con.close()
 
 
 if __name__ == "__main__":

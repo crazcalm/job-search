@@ -11,3 +11,19 @@ class Contact:
         self.phone = phone
         self.description = description
         self.company_uid = company_uid
+
+    @property
+    def full_name(self):
+        return "{} {}".format(self.first_name, self.last_name)
+
+    def __str__(self):
+        return """
+        uid: {}
+        first name: {}
+        last_name: {}
+        email: {}
+        phone: {}
+        description: {}
+        company_uid: {}""".format(
+            self.uid, self.first_name, self.last_name, self.email, self.phone, self.description,
+            self.company_uid)
