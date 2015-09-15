@@ -2,8 +2,12 @@ import sqlite3 as sqlite
 import os
 import subprocess
 
-from base_classes import PracticalSQL
-from constants import TEST_DB, SQL_FILES
+try:
+    from src.base_classes import PracticalSQL
+    from src.constants import TEST_DB, SQL_FILES
+except ImportError:
+    from base_classes import PracticalSQL
+    from constants import TEST_DB, SQL_FILES
 
 
 class SQL(PracticalSQL):

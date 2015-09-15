@@ -1,7 +1,9 @@
 import os
 import sqlite3 as sqlite
-
-from src.constants import TEST_DB
+try:
+    from src.constants import TEST_DB
+except ImportError:
+    from constants import TEST_DB
 
 
 class PracticalSQL:

@@ -1,4 +1,7 @@
-from src.base_classes import SQLModule
+try:
+    from src.base_classes import SQLModule
+except ImportError:
+    from base_classes import SQLModule
 
 
 class JobPosting(SQLModule):
