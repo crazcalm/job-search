@@ -3,7 +3,7 @@ import os
 import sys
 
 # This makes it easy to import the needed files
-sys.path.insert(0, os.path.abspath('..'))
+sys.path.insert(0, os.path.join(os.path.abspath(os.path.dirname(__file__)), ".."))
 
 from src.job_posting_class import JobPosting
 

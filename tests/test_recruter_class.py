@@ -3,13 +3,13 @@ import os
 import sys
 
 # This makes it easy to import the needed files
-sys.path.insert(0, os.path.abspath('..'))
+sys.path.insert(0, os.path.join(os.path.abspath(os.path.dirname(__file__)), ".."))
 
 from src.recruiter_class import Recruiter
 
 
 class TestRecruiter(unittest.TestCase):
-    def setup(self):
+    def setUp(self):
         self.contact = Recruiter()
 
     def test_properties(self):
