@@ -5,8 +5,9 @@ except ImportError:
 
 
 class JobPosting(SQLModule):
-    def __int__(self, uid="", link="", date_applied="", description="", interviewed="",
-                company_uid="", recruiter_uid="", contact_uid=""):
+    def __init__(self, uid="", link="", date_applied="", description="", interviewed="",
+                company_uid=None, recruiter_uid=None, contact_uid=None):
+        super()
         self.uid = uid
         self.link = link
         self.date_applied = date_applied
@@ -28,3 +29,8 @@ class JobPosting(SQLModule):
         contact_uid: {}""".format(
             self.uid, self.link, self.date_applied, self.description, self.interviewed,
             self.company_uid, self.recruiter_uid, self.contact_uid)
+
+
+if __name__ == "__main__":
+    test = JobPosting(link="Testing")
+    print(test)
