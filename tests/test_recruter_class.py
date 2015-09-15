@@ -10,11 +10,33 @@ from src.recruiter_class import Recruiter
 
 class TestRecruiter(unittest.TestCase):
     def setUp(self):
-        self.contact = Recruiter()
+        self.info = {
+            "uid": 1,
+            "first_name": "Marcus",
+            "last_name": "Willock",
+            "email": "crazcalm@gmail.com",
+            "phone": "111-222-3333",
+            "company_uid": 1,
+            "job_posting_uid": 1
+        }
+        self.recruiter = Recruiter(
+            self.info["uid"],
+            self.info["first_name"],
+            self.info["last_name"],
+            self.info["email"],
+            self.info["phone"],
+            self.info["company_uid"],
+            self.info["job_posting_uid"]
+        )
 
-    @unittest.skip("Not implemented")
     def test_properties(self):
-        pass
+        self.assertEqual(self.recruiter.uid, self.info["uid"])
+        self.assertEqual(self.recruiter.first_name, self.info["first_name"])
+        self.assertEqual(self.recruiter.last_name, self.info["last_name"])
+        self.assertEqual(self.recruiter.email, self.info["email"])
+        self.assertEqual(self.recruiter.phone, self.info["phone"])
+        self.assertEqual(self.recruiter.company_uid, self.info["company_uid"])
+        self.assertEqual(self.recruiter.job_posting_uid, self.info["job_posting_uid"])
 
     @unittest.skip("Not implemented")
     def test_full_name(self):
