@@ -28,7 +28,7 @@ class Recruiter(Contact):
             self.init_db()
         query = """
         SELECT id, first_name, last_name, email, phone, description, companyId FROM recruiters
-        WHERE (id=?);
+        WHERE (id=?) ORDER BY id;
         """
         data = self.db.con.execute(query, (uid,))
         return [Recruiter(*item) for item in data]

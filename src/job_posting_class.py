@@ -17,6 +17,28 @@ class JobPosting(SQLModule):
         self.recruiter_uid = recruiter_uid
         self.contact_uid = contact_uid
 
+    def get_all_job_postings(self):
+        if not self.db:
+            self.init_db()
+        query = """
+        SELECT id, link, date_applied, description, interviewed, companyId, recruiterId, contactId
+        FROM job_posting ORDER BY id;
+        """
+        data = self.db.con.execute(query)
+
+        return [JobPosting(*item) for item in data]
+
+    def get_a_job_posting(self, uid):
+        if not self.db:
+            self.init_db()
+        query = """
+        SELECT id, link, date_applied, description, interviewed, companyId, recruiterId, contactId
+        FROM job_posting WHERE (id=?) ORDER BY id;
+        """
+        data = self.db.con.execute(query, (uid,))
+
+        return [JobPosting(*item) for item in data]
+
     def __str__(self):
         return """
         uid: {}
@@ -33,4 +55,5 @@ class JobPosting(SQLModule):
 
 if __name__ == "__main__":
     test = JobPosting(link="Testing")
-    print(test)
+    test.get_all_job_postings()
+    print(test.get_a_job_posting(1)[0])

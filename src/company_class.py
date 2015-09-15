@@ -29,7 +29,7 @@ class Company(SQLModule):
             self.init_db()
 
         query = self.db.con.execute("""
-        SELECT * FROM company WHERE (id=?)
+        SELECT * FROM company WHERE (id=?) ORDER BY id;
         """, (uid,))
 
         return [Company(*data) for data in query]
