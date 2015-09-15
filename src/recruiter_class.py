@@ -16,7 +16,8 @@ class Recruiter(Contact):
             self.init_db()
 
         query = """
-        SELECT * FROM recruiters ORDER BY id;
+        SELECT id, first_name, last_name, email, phone, description, companyId
+        FROM recruiters ORDER BY id;
         """
         data = self.db.con.execute(query)
 
@@ -26,7 +27,7 @@ class Recruiter(Contact):
         if not hasattr(self, "db"):
             self.init_db()
         query = """
-        SELECT first_name, last_name, email, phone, description, company_id FROM recruiters
+        SELECT id, first_name, last_name, email, phone, description, companyId FROM recruiters
         WHERE (id=?);
         """
         data = self.db.con.execute(query, (uid,))
@@ -47,6 +48,6 @@ class Recruiter(Contact):
 
 if __name__ == "__main__":
     test = Recruiter(first_name="Marcus")
-    test.get_all_recruiters()
-    print(test.get_a_recruiter(1)[0])
+    for item in test.get_all_recruiters():
+        print(item)
 
