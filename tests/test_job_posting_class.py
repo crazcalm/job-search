@@ -15,12 +15,15 @@ class TestJobPosting(unittest.TestCase):
     def tearDown(self):
         pass
 
+    @unittest.skip("Not implemented")
     def test_properties(self):
         pass
 
+    @unittest.skip("Not implemented")
     def test_get_all_job_postings(self):
         pass
 
+    @unittest.skip("Not implemented")
     def test_get_a_job_posting(self):
         pass
 

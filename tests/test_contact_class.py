@@ -43,22 +43,23 @@ class TestContact(unittest.TestCase):
     def test_full_name(self):
         pass
 
-    @unittest.skip
+    @unittest.skip("Not implemented")
     def test_in_db(self):
         pass
 
-    @unittest.skip
+    @unittest.skip("Not implemented")
     def test_get_all_contacts(self):
         pass
 
-    @unittest.skip
+    @unittest.skip("Not implemented")
     def test_a_contact(self):
         pass
 
-    @unittest.skip
+    @unittest.skip("Not implemented")
     def test_company(self):
         pass
 
+    @unittest.skip("Not implemented")
     def tearDown(self):
         pass
 

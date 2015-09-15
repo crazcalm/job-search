@@ -12,21 +12,27 @@ class TestRecruiter(unittest.TestCase):
     def setUp(self):
         self.contact = Recruiter()
 
+    @unittest.skip("Not implemented")
     def test_properties(self):
         pass
 
+    @unittest.skip("Not implemented")
     def test_full_name(self):
         pass
 
+    @unittest.skip("Not implemented")
     def test_in_db(self):
         pass
 
+    @unittest.skip("Not implemented")
     def test_get_all_recruiters(self):
         pass
 
+    @unittest.skip("Not implemented")
     def test_a_recruiter(self):
         pass
 
+    @unittest.skip("Not implemented")
     def test_company(self):
         pass
 

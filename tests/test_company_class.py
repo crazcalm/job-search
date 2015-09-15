@@ -34,9 +34,11 @@ class TestCompany(unittest.TestCase):
         self.assertEqual(self.company.website, self.info["website"])
         self.assertEqual(self.company.phone, self.info["phone"])
 
+    @unittest.skip("Not implemented")
     def get_all_companies(self):
         pass
 
+    @unittest.skip("Not implemented")
     def get_a_company(self):
         pass
 
