@@ -11,6 +11,27 @@ class Recruiter(Contact):
         super().__init__(uid, first_name, last_name, email, phone, description, company_uid)
         self.job_posting_uid = job_posting_uid
 
+    def get_all_recruiters(self):
+        if not hasattr(self, "db"):
+            self.init_db()
+
+        query = """
+        SELECT * FROM recruiters ORDER BY id;
+        """
+        data = self.db.con.execute(query)
+
+        return [Recruiter(*item) for item in data]
+
+    def get_a_recruiter(self, uid):
+        if not hasattr(self, "db"):
+            self.init_db()
+        query = """
+        SELECT first_name, last_name, email, phone, description, company_id FROM recruiters
+        WHERE (id=?);
+        """
+        data = self.db.con.execute(query, (uid,))
+        return [Recruiter(*item) for item in data]
+
     def __str__(self):
         return """
         uid: {}
@@ -26,4 +47,6 @@ class Recruiter(Contact):
 
 if __name__ == "__main__":
     test = Recruiter(first_name="Marcus")
-    print(test)
+    test.get_all_recruiters()
+    print(test.get_a_recruiter(1)[0])
+
