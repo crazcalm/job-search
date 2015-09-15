@@ -26,5 +26,5 @@ class SQLModule:
     def __init__(self):
         self.db = None
 
-    def init_db(self, db_path):
-        self.db = PracticalSQL(TEST_DB)
+    def init_db(self, db_path=TEST_DB):
+        self.db = PracticalSQL(db_path)
