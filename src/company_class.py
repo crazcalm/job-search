@@ -6,7 +6,7 @@ except ImportError:
 
 class Company(SQLModule):
     def __init__(self, uid="", name="", address="", website="", phone=""):
-        super()
+        super().__init__()
         self.uid = uid
         self.name = name
         self.address = address
@@ -14,7 +14,7 @@ class Company(SQLModule):
         self.phone = phone
 
     def get_all_companies(self):
-        if not hasattr(self, "db"):
+        if not self.db:
             self.init_db()
 
         query = self.db.con.execute("""

@@ -7,7 +7,7 @@ except ImportError:
 class Contact(SQLModule):
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
                  company_uid=None):
-        super()
+        super().__init__()
         self.uid = uid
         self.first_name = first_name
         self.last_name = last_name

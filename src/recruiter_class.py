@@ -12,7 +12,7 @@ class Recruiter(Contact):
         self.job_posting_uid = job_posting_uid
 
     def get_all_recruiters(self):
-        if not hasattr(self, "db"):
+        if not self.db:
             self.init_db()
 
         query = """
@@ -24,7 +24,7 @@ class Recruiter(Contact):
         return [Recruiter(*item) for item in data]
 
     def get_a_recruiter(self, uid):
-        if not hasattr(self, "db"):
+        if not self.db:
             self.init_db()
         query = """
         SELECT id, first_name, last_name, email, phone, description, companyId FROM recruiters
