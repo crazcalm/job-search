@@ -16,6 +16,7 @@ class TestRecruiter(unittest.TestCase):
             "last_name": "Willock",
             "email": "crazcalm@gmail.com",
             "phone": "111-222-3333",
+            "description": "Nothing interesting",
             "company_uid": 1,
             "job_posting_uid": 1
         }
@@ -25,6 +26,7 @@ class TestRecruiter(unittest.TestCase):
             self.info["last_name"],
             self.info["email"],
             self.info["phone"],
+            self.info["description"],
             self.info["company_uid"],
             self.info["job_posting_uid"]
         )
@@ -37,10 +39,6 @@ class TestRecruiter(unittest.TestCase):
         self.assertEqual(self.recruiter.phone, self.info["phone"])
         self.assertEqual(self.recruiter.company_uid, self.info["company_uid"])
         self.assertEqual(self.recruiter.job_posting_uid, self.info["job_posting_uid"])
-
-    @unittest.skip("Not implemented")
-    def test_full_name(self):
-        pass
 
     @unittest.skip("Not implemented")
     def test_in_db(self):

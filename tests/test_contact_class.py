@@ -19,6 +19,7 @@ class TestContact(unittest.TestCase):
             "description": "Creator",
             "company_uid": 1
         }
+        self.full_name = "{} {}".format(self.info["first_name"], self.info["last_name"])
 
         self.contact = Contact(
             self.info["uid"],
@@ -41,6 +42,7 @@ class TestContact(unittest.TestCase):
         self.assertEqual(self.contact.company_uid, self.info["company_uid"])
 
     def test_full_name(self):
+        self.assertEqual(self.contact.full_name, self.full_name)
         pass
 
     @unittest.skip("Not implemented")
