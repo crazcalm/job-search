@@ -4,9 +4,6 @@ except ImportError:
     from base_classes import SQLModule, Person
 
 
-#Note: I need to separate Contact into two classes so that I do not pollute the
-# the Recruiter classes API...
-
 class Contact(Person):
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
                  company_uid=None):

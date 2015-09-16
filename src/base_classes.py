@@ -6,6 +6,7 @@ except ImportError:
     from constants import TEST_DB
 
 
+#Note: I need to changed db.con to db.conn. That is more intuitive
 class PracticalSQL:
     def __init__(self, db_path):
         # Note: the path might not exist yet...
