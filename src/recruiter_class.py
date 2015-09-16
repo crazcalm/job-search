@@ -1,11 +1,11 @@
 try:
-    from src.contact_class import Contact
+    from src.base_classes import Person
 except ImportError:
-    from contact_class import Contact
+    from base_classes import Person
 
 
 # Note: a recruiter can have many job postings
-class Recruiter(Contact):
+class Recruiter(Person):
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
                  company_uid=None, job_posting_uid=None):
         super().__init__(uid, first_name, last_name, email, phone, description, company_uid)

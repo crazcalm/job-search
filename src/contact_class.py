@@ -1,27 +1,16 @@
 try:
-    from src.base_classes import SQLModule
+    from src.base_classes import SQLModule, Person
 except ImportError:
-    from base_classes import SQLModule
+    from base_classes import SQLModule, Person
 
 
 #Note: I need to separate Contact into two classes so that I do not pollute the
 # the Recruiter classes API...
 
-class Contact(SQLModule):
+class Contact(Person):
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
                  company_uid=None):
-        super().__init__()
-        self.uid = uid
-        self.first_name = first_name
-        self.last_name = last_name
-        self.email = email
-        self.phone = phone
-        self.description = description
-        self.company_uid = company_uid
-
-    @property
-    def full_name(self):
-        return "{} {}".format(self.first_name, self.last_name)
+        super().__init__(uid, first_name, last_name, email, phone, description, company_uid)
 
     def get_all_contacts(self):
         if not self.db:

@@ -28,3 +28,20 @@ class SQLModule:
 
     def init_db(self, db_path=TEST_DB):
         self.db = PracticalSQL(db_path)
+
+
+class Person(SQLModule):
+    def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
+                 company_uid=None):
+        super().__init__()
+        self.uid = uid
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+        self.phone = phone
+        self.description = description
+        self.company_uid = company_uid
+
+    @property
+    def full_name(self):
+        return "{} {}".format(self.first_name, self.last_name)
