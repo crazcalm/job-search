@@ -17,22 +17,26 @@ class Company(SQLModule):
         if not self.db:
             self.init_db()
 
-        query = self.db.con.execute("""
-        SELECT * FROM company ORDER BY id;
-        """)
+        query = """
+        SELECT id, name, address, website, phone FROM company ORDER BY id;
+        """
 
-        return [Company(*item) for item in query]
+        data = self.db.con.execute(query)
+
+        return [Company(*item) for item in data]
 
     def get_a_company(self, uid):
         assert isinstance(uid, int)
         if not hasattr(self, "db"):
             self.init_db()
 
-        query = self.db.con.execute("""
-        SELECT * FROM company WHERE (id=?) ORDER BY id;
-        """, (uid,))
+        query = """
+        SELECT id, name, address, website, phone FROM company WHERE (id=?) ORDER BY id
+        """
 
-        return [Company(*data) for data in query]
+        data = self.db.con.execute(query, (uid,))
+
+        return [Company(*item) for item in data]
 
     def __str__(self):
         return """
