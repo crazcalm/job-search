@@ -21,7 +21,7 @@ class Company(SQLModule):
         SELECT id, name, address, website, phone FROM company ORDER BY id;
         """
 
-        data = self.db.con.execute(query)
+        data = self.db.conn.execute(query)
 
         return [Company(*item) for item in data]
 
@@ -34,7 +34,7 @@ class Company(SQLModule):
         SELECT id, name, address, website, phone FROM company WHERE (id=?) ORDER BY id
         """
 
-        data = self.db.con.execute(query, (uid,))
+        data = self.db.conn.execute(query, (uid,))
 
         return [Company(*item) for item in data]
 

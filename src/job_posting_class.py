@@ -24,7 +24,7 @@ class JobPosting(SQLModule):
         SELECT id, link, date_applied, description, interviewed, companyId, recruiterId, contactId
         FROM job_posting ORDER BY id;
         """
-        data = self.db.con.execute(query)
+        data = self.db.conn.execute(query)
 
         return [JobPosting(*item) for item in data]
 
@@ -35,7 +35,7 @@ class JobPosting(SQLModule):
         SELECT id, link, date_applied, description, interviewed, companyId, recruiterId, contactId
         FROM job_posting WHERE (id=?) ORDER BY id;
         """
-        data = self.db.con.execute(query, (uid,))
+        data = self.db.conn.execute(query, (uid,))
 
         return [JobPosting(*item) for item in data]
 

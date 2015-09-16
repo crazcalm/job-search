@@ -18,7 +18,7 @@ class Contact(Person):
         FROM contacts ORDER BY id;
         """
 
-        data = self.db.con.execute(query)
+        data = self.db.conn.execute(query)
 
         return [Contact(*item) for item in data]
 
@@ -31,7 +31,7 @@ class Contact(Person):
         FROM contacts WHERE (id=?) ORDER BY id;
         """
 
-        data = self.db.con.execute(query, (uid,))
+        data = self.db.conn.execute(query, (uid,))
 
         return [Contact(*item) for item in data]
 

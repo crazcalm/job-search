@@ -19,7 +19,7 @@ class Recruiter(Person):
         SELECT id, first_name, last_name, email, phone, description, companyId
         FROM recruiters ORDER BY id;
         """
-        data = self.db.con.execute(query)
+        data = self.db.conn.execute(query)
 
         return [Recruiter(*item) for item in data]
 
@@ -30,7 +30,7 @@ class Recruiter(Person):
         SELECT id, first_name, last_name, email, phone, description, companyId FROM recruiters
         WHERE (id=?) ORDER BY id;
         """
-        data = self.db.con.execute(query, (uid,))
+        data = self.db.conn.execute(query, (uid,))
         return [Recruiter(*item) for item in data]
 
     def __str__(self):

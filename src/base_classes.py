@@ -6,21 +6,20 @@ except ImportError:
     from constants import TEST_DB
 
 
-#Note: I need to changed db.con to db.conn. That is more intuitive
 class PracticalSQL:
     def __init__(self, db_path):
         # Note: the path might not exist yet...
         assert ";" not in db_path
         self.db_dir_path, self.db_name = os.path.split(db_path)
         self.db_path = os.path.abspath(db_path)
-        self.con = sqlite.connect(db_path)
+        self.conn = sqlite.connect(db_path)
 
         # enable foreign keys
-        self.con.execute("""PRAGMA foreign_keys = ON""")
-        self.con.commit()
+        self.conn.execute("""PRAGMA foreign_keys = ON""")
+        self.conn.commit()
 
     def close(self):
-        self.con.close()
+        self.conn.close()
 
 
 class SQLModule:
