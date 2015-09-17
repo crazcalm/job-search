@@ -5,7 +5,7 @@ TEST_DB = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "SQL_fil
 SQL_FILES = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "SQL_files"))
 
 
-# DB creatation sql statments
+# DB creation sql statements
 COMPANY_DB = {
     "table": "DROP TABLE IF EXISTS company;",
     "columns": """
