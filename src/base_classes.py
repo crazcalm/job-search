@@ -29,6 +29,21 @@ class SQLModule:
     def init_db(self, db_path=TEST_DB):
         self.db = PracticalSQL(db_path)
 
+    def update_row_in_db(self, table_name, columns, values):
+        columns_string = "=?, ".join(columns) + "=? "
+        string = """
+        UPDATE {}
+        SET {}
+        WHERE id=?
+        """.format(table_name, columns_string)
+
+        self.db.conn.execute(string, values)
+
+    def insert_row_into_db(self):
+        pass
+
+    def delete_row_in_db(self):
+        pass
 
 class Person(SQLModule):
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
@@ -45,3 +60,11 @@ class Person(SQLModule):
     @property
     def full_name(self):
         return "{} {}".format(self.first_name, self.last_name)
+
+
+if __name__ == "__main__":
+    test = SQLModule()
+    table_name = "table_name"
+    columns = ("id", "first_name", "last_name", "company")
+    values = (1, "Marcus", "Willock", 1)
+    #test.update_row_in_db(table_name, columns, values)
