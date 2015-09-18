@@ -16,8 +16,14 @@ class Company(SQLModule):
         self.address = address
         self.website = website
         self.phone = phone
-        self.values = (self.name, self.address, self.website, self.phone)
-        self.values_with_id = (self.name, self.address, self.website, self.phone, self.uid)
+
+    @property
+    def values(self):
+        return self.name, self.address, self.website, self.phone
+
+    @property
+    def values_with_id(self):
+        return self.name, self.address, self.website, self.phone, self.uid
 
     def get_all_companies(self):
         if not self.db:
@@ -80,7 +86,9 @@ class Company(SQLModule):
 
 if __name__ == "__main__":
     test = Company(name="DavidInc")
-    test.add_company_to_db()
-    print(test)
+    test2 = test.get_a_company(7)[0]
+    print(test2)
+    test2.name = "I just changed you!"
+    test2.update_company_in_db()
     for company in test.get_all_companies():
         print(company)
