@@ -6,6 +6,7 @@ import sys
 sys.path.insert(0, os.path.join(os.path.abspath(os.path.dirname(__file__)), ".."))
 
 from src.company_class import Company
+from src.sql_class import SQL
 
 
 class TestCompany(unittest.TestCase):
@@ -24,6 +25,11 @@ class TestCompany(unittest.TestCase):
             self.info["phone"]
         )
 
+        #Reset the database
+        db = SQL()
+        db.create_db()
+        db.add_test_data_to_db()
+
     def tearDown(self):
         pass
 
@@ -34,13 +40,12 @@ class TestCompany(unittest.TestCase):
         self.assertEqual(self.company.website, self.info["website"])
         self.assertEqual(self.company.phone, self.info["phone"])
 
-    @unittest.skip("Not implemented")
-    def get_all_companies(self):
-        pass
+    def test_get_all_companies(self):
+        self.assertEqual(5, len(self.company.get_all_companies()))
 
-    @unittest.skip("Not implemented")
-    def get_a_company(self):
-        pass
+    def test_get_a_company(self):
+        data = self.company.get_a_company(1)[0]
+        self.assertEqual("Google", data.name)
 
 
 if __name__ == "__main__":

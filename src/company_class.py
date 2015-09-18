@@ -27,7 +27,7 @@ class Company(SQLModule):
 
     def get_a_company(self, uid):
         assert isinstance(uid, int)
-        if not hasattr(self, "db"):
+        if not self.db:
             self.init_db()
 
         query = """
