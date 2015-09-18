@@ -36,7 +36,7 @@ CONTACTS_DB = {
 }
 
 RECRUITERS_DB = {
-    "tables": "DROP TABLE IF EXISTS recruiters;",
+    "table": "DROP TABLE IF EXISTS recruiters;",
     "columns": """
     CREATE TABLE recruiters(
     id                  INTEGER PRIMARY KEY,
@@ -84,7 +84,7 @@ COMPANY_DATA = [
      ' "IBM.com", "777-777-7777");'),
     ('INSERT INTO company (name, address, website, phone) VALUES ("Bing", "Cali",'
      ' "Bing.com", "888-888-8888");'),
-    ('INSERT INTO company (name, address, website, phone) VALUES ("Crazcalm", "NYC",',
+    ('INSERT INTO company (name, address, website, phone) VALUES ("Crazcalm", "NYC",'
      ' "Crazcalm.com", "999-999-9999");')
 ]
 
