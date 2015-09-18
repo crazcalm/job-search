@@ -6,6 +6,7 @@ import sys
 sys.path.insert(0, os.path.join(os.path.abspath(os.path.dirname(__file__)), ".."))
 
 from src.contact_class import Contact
+from src.sql_class import SQL
 
 
 class TestContact(unittest.TestCase):
@@ -31,6 +32,11 @@ class TestContact(unittest.TestCase):
             self.info["company_uid"]
         )
 
+        # Setting up the test db
+        db = SQL()
+        db.create_db()
+        db.add_test_data_to_db()
+
     def test_properties(self):
         self.assertTrue(self.contact)
         self.assertEqual(self.contact.uid, self.info["uid"])
@@ -43,27 +49,13 @@ class TestContact(unittest.TestCase):
 
     def test_full_name(self):
         self.assertEqual(self.contact.full_name, self.full_name)
-        pass
 
-    @unittest.skip("Not implemented")
-    def test_in_db(self):
-        pass
-
-    @unittest.skip("Not implemented")
     def test_get_all_contacts(self):
-        pass
+        self.assertEqual(5, len(self.contact.get_all_contacts()))
 
-    @unittest.skip("Not implemented")
     def test_a_contact(self):
-        pass
-
-    @unittest.skip("Not implemented")
-    def test_company(self):
-        pass
-
-    @unittest.skip("Not implemented")
-    def tearDown(self):
-        pass
+        data = self.contact.get_a_contact(1)[0]
+        self.assertEqual("Marcus", data.first_name)
 
 
 if __name__ == "__main__":
