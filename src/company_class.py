@@ -67,14 +67,14 @@ class Company(SQLModule):
 
         self.update_row_in_db(Company.table_name, Company.columns, self.values_with_id)
 
-    def delete_a_company(self):
+    def delete_company_in_db(self):
         if not self.db:
             self.init_db()
 
         # Make sure that the Company exists
         assert not self.uid == ""
 
-        self.delete_row_in_db(Company.table_name, self.uid)
+        self.delete_row_in_db(Company.table_name, (self.uid,))
 
     def __str__(self):
         return """
@@ -86,9 +86,3 @@ class Company(SQLModule):
 
 if __name__ == "__main__":
     test = Company(name="DavidInc")
-    test2 = test.get_a_company(7)[0]
-    print(test2)
-    test2.name = "I just changed you!"
-    test2.update_company_in_db()
-    for company in test.get_all_companies():
-        print(company)
