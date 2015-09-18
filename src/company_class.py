@@ -49,6 +49,9 @@ class Company(SQLModule):
 
         self.insert_row_into_db(Company.table_name, Company.columns, self.values)
 
+        # updating the uid for the current object
+        self.uid = self.get_all_companies()[-1].uid
+
     def update_company_in_db(self):
         if not self.db:
             self.init_db()
@@ -76,6 +79,8 @@ class Company(SQLModule):
         phone: {}""".format(self.uid, self.name, self.address, self.website, self.phone)
 
 if __name__ == "__main__":
-    test = Company(name="Crazcalm")
-    test.get_all_companies()
-    print(test.get_a_company(1)[0])
+    test = Company(name="DavidInc")
+    test.add_company_to_db()
+    print(test)
+    for company in test.get_all_companies():
+        print(company)

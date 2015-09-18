@@ -38,6 +38,7 @@ class SQLModule:
         """.format(table_name, columns_string)
 
         self.db.conn.execute(string, values)
+        self.db.conn.commit()
 
     def insert_row_into_db(self, table_name, columns, values):
         columns_string = "(" + ", ".join(columns) + ")"
@@ -48,6 +49,7 @@ class SQLModule:
         """.format(table_name, columns_string, value_placeholder)
 
         self.db.conn.execute(string, values)
+        self.db.conn.commit()
 
     def delete_row_in_db(self, table_name, uid):
         string = """
@@ -56,6 +58,7 @@ class SQLModule:
         """.format(table_name)
 
         self.db.conn.execute(string, uid)
+        self.db.conn.commit()
 
 class Person(SQLModule):
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
