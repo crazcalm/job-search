@@ -39,11 +39,23 @@ class SQLModule:
 
         self.db.conn.execute(string, values)
 
-    def insert_row_into_db(self):
-        pass
+    def insert_row_into_db(self, table_name, columns, values):
+        columns_string = "(" + ", ".join(columns) + ")"
+        value_placeholder = "(" + "?, " * (len(columns) - 1) + "?)"
+        string = """
+        INSERT INTO {} {}
+        VALUES {}
+        """.format(table_name, columns_string, value_placeholder)
 
-    def delete_row_in_db(self):
-        pass
+        self.db.conn.execute(string, values)
+
+    def delete_row_in_db(self, table_name, uid):
+        string = """
+        DELETE FROM {}
+        WHERE id=?
+        """.format(table_name)
+
+        self.db.conn.execute(string, uid)
 
 class Person(SQLModule):
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
@@ -67,4 +79,4 @@ if __name__ == "__main__":
     table_name = "table_name"
     columns = ("id", "first_name", "last_name", "company")
     values = (1, "Marcus", "Willock", 1)
-    #test.update_row_in_db(table_name, columns, values)
+    #test.insert_row_into_db(table_name, columns, values)
