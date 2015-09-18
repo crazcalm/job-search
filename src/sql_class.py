@@ -1,4 +1,3 @@
-import sqlite3 as sqlite
 import os
 import subprocess
 
@@ -30,20 +29,20 @@ class SQL(PracticalSQL):
         assert os.path.isdir(path_to_dir)
 
         if data:
-            sql_files = [file for file in os.listdir(path_to_dir) if file.endswith(".sql") and
-                         "data" in file]
+            sql_files = [file_ for file_ in os.listdir(path_to_dir) if file_.endswith(".sql") and
+                         "data" in file_]
         else:
-            sql_files = [file for file in os.listdir(path_to_dir) if file.endswith(".sql") and
-                         "data" not in file]
+            sql_files = [file_ for file_ in os.listdir(path_to_dir) if file_.endswith(".sql") and
+                         "data" not in file_]
         sql_files.sort()
 
         # Saving current dir and then changing to new dir
         old_cwd = os.getcwd()
         os.chdir(path_to_dir)
 
-        for file in sql_files:
-            print("current_file: ", file)
-            self._add_data_to_db(file)
+        for file_ in sql_files:
+            print("current_file: ", file_)
+            self._add_data_to_db(file_)
 
         # Returning to old directory
         os.chdir(old_cwd)
