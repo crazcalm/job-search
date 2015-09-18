@@ -6,6 +6,7 @@ import sys
 sys.path.insert(0, os.path.join(os.path.abspath(os.path.dirname(__file__)), ".."))
 
 from src.job_posting_class import JobPosting
+from src.sql_class import SQL
 
 
 class TestJobPosting(unittest.TestCase):
@@ -30,9 +31,10 @@ class TestJobPosting(unittest.TestCase):
             self.info["recruiter_uid"],
             self.info["contact_uid"]
         )
-
-    def tearDown(self):
-        pass
+        # Setting up the DB
+        db = SQL()
+        db.create_db()
+        db.add_test_data_to_db()
 
     def test_properties(self):
         self.assertEqual(self.job_posting.uid, self.info["uid"])
@@ -44,13 +46,12 @@ class TestJobPosting(unittest.TestCase):
         self.assertEqual(self.job_posting.recruiter_uid, self.info["recruiter_uid"])
         self.assertEqual(self.job_posting.contact_uid, self.info["contact_uid"])
 
-    @unittest.skip("Not implemented")
     def test_get_all_job_postings(self):
-        pass
+        self.assertEqual(1, len(self.job_posting.get_all_job_postings()))
 
-    @unittest.skip("Not implemented")
     def test_get_a_job_posting(self):
-        pass
+        data = self.job_posting.get_a_job_posting(1)[0]
+        self.assertEqual("www.link.com", data.link)
 
 
 if __name__ == "__main__":
