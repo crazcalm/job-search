@@ -6,6 +6,7 @@ import sys
 sys.path.insert(0, os.path.join(os.path.abspath(os.path.dirname(__file__)), ".."))
 
 from src.recruiter_class import Recruiter
+from src.sql_class import SQL
 
 
 class TestRecruiter(unittest.TestCase):
@@ -30,6 +31,10 @@ class TestRecruiter(unittest.TestCase):
             self.info["company_uid"],
             self.info["job_posting_uid"]
         )
+        # Setting up the db
+        db = SQL()
+        db.create_db()
+        db.add_test_data_to_db()
 
     def test_properties(self):
         self.assertEqual(self.recruiter.uid, self.info["uid"])
@@ -40,21 +45,12 @@ class TestRecruiter(unittest.TestCase):
         self.assertEqual(self.recruiter.company_uid, self.info["company_uid"])
         self.assertEqual(self.recruiter.job_posting_uid, self.info["job_posting_uid"])
 
-    @unittest.skip("Not implemented")
-    def test_in_db(self):
-        pass
-
-    @unittest.skip("Not implemented")
     def test_get_all_recruiters(self):
-        pass
+        self.assertEqual(7, len(self.recruiter.get_all_recruiters()))
 
-    @unittest.skip("Not implemented")
     def test_a_recruiter(self):
-        pass
-
-    @unittest.skip("Not implemented")
-    def test_company(self):
-        pass
+        data = self.recruiter.get_a_recruiter(1)[0]
+        self.assertEqual("Recruiter1", data.first_name)
 
     def tearDown(self):
         pass
