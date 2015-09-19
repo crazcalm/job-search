@@ -5,18 +5,27 @@ except ImportError:
 
 
 class Contact(Person):
+    table_name = "contacts"
+    columns = ("first_name", "last_name", "email", "phone", "description", "companyId")
+    columns_with_uid = ("first_name", "last_name", "email", "phone", "description", "companyId", "id")
+
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
                  company_uid=None):
         super().__init__(uid, first_name, last_name, email, phone, description, company_uid)
+
+    @property
+    def values(self):
+        return self.first_name, self.last_name, self.email, self.phone, self.description, self.company_uid
+
+    @property
+    def values_with_uid(self):
+        return self.first_name, self.last_name, self.email, self.phone, self.description, self.company_uid, self.uid
 
     def get_all_contacts(self):
         if not self.db:
             self.init_db()
 
-        query = """
-        SELECT id, first_name, last_name, email, phone, description, companyId
-        FROM contacts ORDER BY id;
-        """
+        query = "SELECT {} FROM contacts ORDER BY id;".format(", ".join(Contact.columns_with_uid))
 
         data = self.db.conn.execute(query)
 
@@ -26,14 +35,41 @@ class Contact(Person):
         if not self.db:
             self.init_db()
 
-        query = """
-        SELECT id, first_name, last_name, email, phone, description, companyId
-        FROM contacts WHERE (id=?) ORDER BY id;
-        """
+        query = "SELECT {} FROM contacts WHERE (id=?) ORDER BY id;".format(", ".join(Contact.columns_with_uid))
 
         data = self.db.conn.execute(query, (uid,))
 
         return [Contact(*item) for item in data]
+
+    def add_contact_to_db(self):
+        if not self.db:
+            self.init_db()
+
+        # make sure that the object is not in the db
+        assert self.uid == ""
+
+        self.insert_row_into_db(Contact.table_name, Contact.columns, self.values)
+
+        # update this objects uid
+        self.uid = self.get_all_contacts()[-1].uid
+
+    def update_contact_in_db(self):
+        if not self.db:
+            self.init_db()
+
+        # making sure that the object is in the db
+        assert not self.uid == ""
+
+        self.update_row_in_db(Contact.table_name, Contact.columns, self.values_with_uid)
+
+    def delete_contact_in_db(self):
+        if not self.db:
+            self.init_db()
+
+        # making sure that the object is in the db
+        assert not self.uid == ""
+
+        self.delete_row_in_db(Contact.table_name, self.uid)
 
     def __str__(self):
         return """
