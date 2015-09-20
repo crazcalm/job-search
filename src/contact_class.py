@@ -25,7 +25,7 @@ class Contact(Person):
         if not self.db:
             self.init_db()
 
-        query = "SELECT {} FROM contacts ORDER BY id;".format(", ".join(Contact.columns_with_uid))
+        query = "SELECT {} FROM {} ORDER BY id;".format(", ".join(Contact.columns_with_uid, Contact.table_name))
 
         data = self.db.conn.execute(query)
 
@@ -35,7 +35,8 @@ class Contact(Person):
         if not self.db:
             self.init_db()
 
-        query = "SELECT {} FROM contacts WHERE (id=?) ORDER BY id;".format(", ".join(Contact.columns_with_uid))
+        query = "SELECT {} FROM {} WHERE (id=?) ORDER BY id;".format(
+            ", ".join(Contact.columns_with_uid), Contact.table_name)
 
         data = self.db.conn.execute(query, (uid,))
 

@@ -29,7 +29,7 @@ class Company(SQLModule):
         if not self.db:
             self.init_db()
 
-        query = "SELECT {} FROM company ORDER BY id;".format(", ".join(Company.columns_with_uid))
+        query = "SELECT {} FROM {} ORDER BY id;".format(", ".join(Company.columns_with_uid), Company.table_name)
 
         data = self.db.conn.execute(query)
 
@@ -40,7 +40,8 @@ class Company(SQLModule):
         if not self.db:
             self.init_db()
 
-        query = "SELECT {} FROM company WHERE (id=?) ORDER BY id;".format(", ".join(Company.columns_with_uid))
+        query = "SELECT {} FROM {} WHERE (id=?) ORDER BY id;".format(
+            ", ".join(Company.columns_with_uid), Company.table_name)
 
         data = self.db.conn.execute(query, (uid,))
 
