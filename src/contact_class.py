@@ -7,7 +7,7 @@ except ImportError:
 class Contact(Person):
     table_name = "contacts"
     columns = ("first_name", "last_name", "email", "phone", "description", "companyId")
-    columns_with_uid = ("first_name", "last_name", "email", "phone", "description", "companyId", "id")
+    columns_with_uid = ("id", "first_name", "last_name", "email", "phone", "description", "companyId")
 
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
                  company_uid=None):
