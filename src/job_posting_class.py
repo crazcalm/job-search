@@ -33,7 +33,6 @@ class JobPosting(SQLModule):
         return (self.link, self.date_applied, self.description, self.interviewed, self.company_uid,
                 self.recruiter_uid, self.contact_uid, self.uid)
 
-    # This should be a class method
     def get_all_job_postings(self):
         if not self.db:
             self.init_db()
@@ -42,7 +41,6 @@ class JobPosting(SQLModule):
 
         return [JobPosting(*item) for item in data]
 
-    # This should be a class method...
     def get_a_job_posting(self, uid):
         if not self.db:
             self.init_db()
