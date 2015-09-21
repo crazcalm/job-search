@@ -32,6 +32,9 @@ class TestContact(unittest.TestCase):
             self.info["company_uid"]
         )
 
+        self.new_first_name = "Testin!!!"
+        self.total_num_of_contacts = 5
+
         # Setting up the test db
         db = SQL()
         db.create_db()
@@ -61,6 +64,18 @@ class TestContact(unittest.TestCase):
         self.contact.add_contact_to_db()
         self.assertTrue(self.contact.uid)
 
+    def test_update_contact_in_db(self):
+        test_class = self.contact.get_a_contact(1)[0]
+        test_class.first_name = self.new_first_name
+        test_class.update_contact_in_db()
+        test_class = self.contact.get_a_contact(1)[0]
+        self.assertEqual(test_class.first_name, self.new_first_name)
+
+    def test_delete_contact_in_db(self):
+        test_class = self.contact.get_a_contact(1)[0]
+        test_class.delete_contact_in_db()
+        list_of_contacts = self.contact.get_all_contacts()
+        self.assertEqual(len(list_of_contacts), self.total_num_of_contacts - 1)
 
 if __name__ == "__main__":
     unittest.main()
