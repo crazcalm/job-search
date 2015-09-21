@@ -78,7 +78,7 @@ class Recruiter(Person):
         # make sure that the object is in the db
         assert  not self.uid == ""
 
-        self.delete_row_in_db(Recruiter.table_name, self.uid)
+        self.delete_row_in_db(Recruiter.table_name, (self.uid,))
 
     def __str__(self):
         return """
