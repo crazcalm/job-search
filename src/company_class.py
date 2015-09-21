@@ -57,7 +57,7 @@ class Company(SQLModule):
         self.insert_row_into_db(Company.table_name, Company.columns, self.values)
 
         # updating the uid for the current object
-        self.uid = self.get_all_companies()[-1].uid
+        self.uid = self.get_id_of_last_row(Company.table_name)
 
     def update_company_in_db(self):
         if not self.db:

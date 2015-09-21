@@ -52,7 +52,7 @@ class Contact(Person):
         self.insert_row_into_db(Contact.table_name, Contact.columns, self.values)
 
         # update this objects uid
-        self.uid = self.get_all_contacts()[-1].uid
+        self.uid = self.get_id_of_last_row(Contact.table_name)
 
     def update_contact_in_db(self):
         if not self.db:

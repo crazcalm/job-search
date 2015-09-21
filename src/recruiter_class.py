@@ -60,7 +60,7 @@ class Recruiter(Person):
         self.insert_row_into_db(Recruiter.table_name, Recruiter.columns, self.values)
 
         # update the uid for current object
-        self.uid = self.get_all_recruiters()[-1].uid
+        self.uid = self.get_id_of_last_row(Recruiter.table_name)
 
     def update_recruiter_in_db(self):
         if not self.db:

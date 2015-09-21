@@ -61,7 +61,7 @@ class JobPosting(SQLModule):
         self.insert_row_into_db(JobPosting.table_name, JobPosting.columns, self.values)
 
         # need to update the uid on this object
-        self.uid = self.get_all_job_postings()[-1].uid
+        self.uid = self.get_id_of_last_row(JobPosting.table_name)
 
     def update_job_posting_in_db(self):
         if not self.db:

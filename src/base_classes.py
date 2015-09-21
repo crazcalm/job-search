@@ -31,34 +31,51 @@ class SQLModule:
 
     def update_row_in_db(self, table_name, columns, values):
         columns_string = "=?, ".join(columns) + "=? "
-        string = """
+        query = """
         UPDATE {}
         SET {}
         WHERE id=?
         """.format(table_name, columns_string)
 
-        self.db.conn.execute(string, values)
+        self.db.conn.execute(query, values)
         self.db.conn.commit()
 
     def insert_row_into_db(self, table_name, columns, values):
         columns_string = "(" + ", ".join(columns) + ")"
         value_placeholder = "(" + "?, " * (len(columns) - 1) + "?)"
-        string = """
+        query = """
         INSERT INTO {} {}
         VALUES {}
         """.format(table_name, columns_string, value_placeholder)
 
-        self.db.conn.execute(string, values)
+        self.db.conn.execute(query, values)
         self.db.conn.commit()
 
     def delete_row_in_db(self, table_name, uid):
-        string = """
+        query = """
         DELETE FROM {}
         WHERE id=?
         """.format(table_name)
 
-        self.db.conn.execute(string, uid)
+        self.db.conn.execute(query, uid)
         self.db.conn.commit()
+
+    def get_id_of_last_row(self, table_name):
+        query = """
+        SELECT id
+        FROM {}
+        ORDER BY id
+        DESC
+        LIMIT 1
+        """.format(table_name)
+
+        items = self.db.conn.execute(query)
+
+        # list of tuples
+        uids = [uid for uid in items]
+
+        # need to return the first item of the first tuple in the list
+        return uids[0][0]
 
 class Person(SQLModule):
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
