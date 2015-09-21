@@ -26,6 +26,7 @@ class TestCompany(unittest.TestCase):
         )
         self.new_uid = "6"
         self.new_name = "Testing!!!"
+        self.total_num_of_companies = 5
 
         #Reset the database
         db = SQL()
@@ -50,13 +51,18 @@ class TestCompany(unittest.TestCase):
         self.company.add_company_to_db()
         self.assertTrue(self.company.uid)
 
-    @unittest.skip("I do not know how to test this without coupling this with another unit test")
     def test_update_company_in_db(self):
-        pass
+        test_class = self.company.get_a_company(1)[0]
+        test_class.name = self.new_name
+        test_class.update_company_in_db()
+        test_class = self.company.get_a_company(1)[0]
+        self.assertEqual(test_class.name, self.new_name)
 
-    @unittest.skip("I do not know how to test this without coupling this with another unit test")
     def test_delete_company_in_db(self):
-        pass
+        test_class = self.company.get_a_company(1)[0]
+        test_class.delete_company_in_db()
+        list_of_companies = self.company.get_all_companies()
+        self.assertEqual(len(list_of_companies), self.total_num_of_companies -1)
 
 
 if __name__ == "__main__":
