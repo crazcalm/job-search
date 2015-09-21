@@ -12,7 +12,7 @@ from src.sql_class import SQL
 class TestRecruiter(unittest.TestCase):
     def setUp(self):
         self.info = {
-            "uid": 1,
+            "uid": "",
             "first_name": "Marcus",
             "last_name": "Willock",
             "email": "crazcalm@gmail.com",
@@ -52,8 +52,9 @@ class TestRecruiter(unittest.TestCase):
         data = self.recruiter.get_a_recruiter(1)[0]
         self.assertEqual("Recruiter1", data.first_name)
 
-    def tearDown(self):
-        pass
+    def test_add_recruiter_to_db(self):
+        self.recruiter.add_recruiter_to_db()
+        self.assertTrue(self.recruiter.uid)
 
 
 if __name__ == "__main__":

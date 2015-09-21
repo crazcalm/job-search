@@ -12,7 +12,7 @@ from src.sql_class import SQL
 class TestContact(unittest.TestCase):
     def setUp(self):
         self.info = {
-            "uid": 1,
+            "uid": "",
             "first_name": "Marcus",
             "last_name": "Willock",
             "email": "crazcalm@gmail.com",
@@ -56,6 +56,10 @@ class TestContact(unittest.TestCase):
     def test_a_contact(self):
         data = self.contact.get_a_contact(1)[0]
         self.assertEqual("Marcus", data.first_name)
+
+    def test_add_contact_to_db(self):
+        self.contact.add_contact_to_db()
+        self.assertTrue(self.contact.uid)
 
 
 if __name__ == "__main__":

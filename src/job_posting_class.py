@@ -37,7 +37,7 @@ class JobPosting(SQLModule):
     def get_all_job_postings(self):
         if not self.db:
             self.init_db()
-        query = "SELECT {} FROM {} ORDER BY id;".format(JobPosting.company_uid, JobPosting.table_name)
+        query = "SELECT {} FROM {} ORDER BY id;".format(JobPosting.columns_with_uid, JobPosting.table_name)
         data = self.db.conn.execute(query)
 
         return [JobPosting(*item) for item in data]
@@ -46,7 +46,7 @@ class JobPosting(SQLModule):
     def get_a_job_posting(self, uid):
         if not self.db:
             self.init_db()
-        query = "SELECT {} FROM {} WHERE (id=?) ORDER BY id;".format(JobPosting.company_uid, JobPosting.table_name)
+        query = "SELECT {} FROM {} WHERE (id=?) ORDER BY id;".format(JobPosting.columns_with_uid, JobPosting.table_name)
         data = self.db.conn.execute(query, (uid,))
 
         return [JobPosting(*item) for item in data]
@@ -58,7 +58,7 @@ class JobPosting(SQLModule):
         # make sure object is not in db
         assert self.uid == ""
 
-        self.update_row_in_db(JobPosting.table_name, JobPosting.columns, self.values)
+        self.insert_row_into_db(JobPosting.table_name, JobPosting.columns, self.values)
 
         # need to update the uid on this object
         self.uid = self.get_all_job_postings()[-1].uid

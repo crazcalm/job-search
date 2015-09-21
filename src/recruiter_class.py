@@ -37,7 +37,7 @@ class Recruiter(Person):
         if not self.db:
             self.init_db()
         query = "SELECT {} FROM {} WHERE (id=?) ORDER BY id;".format(
-            ", ".join(Recruiter.company_uid), Recruiter.table_name)
+            ", ".join(Recruiter.columns_with_uid), Recruiter.table_name)
 
         data = self.db.conn.execute(query, (uid,))
 
@@ -58,6 +58,9 @@ class Recruiter(Person):
         assert self.uid == ""
 
         self.insert_row_into_db(Recruiter.table_name, Recruiter.columns, self.values)
+
+        # update the uid for current object
+        self.uid = self.get_all_recruiters()[-1].uid
 
     def update_recruiter_in_db(self):
         if not self.db:

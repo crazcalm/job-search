@@ -12,7 +12,7 @@ from src.sql_class import SQL
 class TestCompany(unittest.TestCase):
     def setUp(self):
         self.info = {
-            "uid": 1,
+            "uid": "",
             "name": "Test Company",
             "address": "new york, NY",
             "website": "www.testing.com",
@@ -24,14 +24,13 @@ class TestCompany(unittest.TestCase):
             self.info["website"],
             self.info["phone"]
         )
+        self.new_uid = "6"
+        self.new_name = "Testing!!!"
 
         #Reset the database
         db = SQL()
         db.create_db()
         db.add_test_data_to_db()
-
-    def tearDown(self):
-        pass
 
     def test_properties(self):
         self.assertEqual(self.company.uid, self.info["uid"])
@@ -46,6 +45,18 @@ class TestCompany(unittest.TestCase):
     def test_get_a_company(self):
         data = self.company.get_a_company(1)[0]
         self.assertEqual("Google", data.name)
+
+    def test_add_company_to_db(self):
+        self.company.add_company_to_db()
+        self.assertTrue(self.company.uid)
+
+    @unittest.skip("I do not know how to test this without coupling this with another unit test")
+    def test_update_company_in_db(self):
+        pass
+
+    @unittest.skip("I do not know how to test this without coupling this with another unit test")
+    def test_delete_company_in_db(self):
+        pass
 
 
 if __name__ == "__main__":

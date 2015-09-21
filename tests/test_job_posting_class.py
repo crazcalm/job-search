@@ -12,7 +12,7 @@ from src.sql_class import SQL
 class TestJobPosting(unittest.TestCase):
     def setUp(self):
         self.info = {
-            "uid": 1,
+            "uid": "",
             "link": "www.test.com",
             "date_applied": "TIME NOW",
             "description": "Job posting Description",
@@ -53,6 +53,9 @@ class TestJobPosting(unittest.TestCase):
         data = self.job_posting.get_a_job_posting(1)[0]
         self.assertEqual("www.link.com", data.link)
 
+    def test_add_job_posting_to_db(self):
+        self.job_posting.add_job_posting_to_db()
+        self.assertTrue(self.job_posting.uid)
 
 if __name__ == "__main__":
     unittest.main()
