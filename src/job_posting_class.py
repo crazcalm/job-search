@@ -77,7 +77,7 @@ class JobPosting(SQLModule):
         # make sure this object is in the db
         assert not self.uid == ""
 
-        self.delete_row_in_db(JobPosting.table_name, self.uid)
+        self.delete_row_in_db(JobPosting.table_name, (self.uid,))
 
     def __str__(self):
         return """

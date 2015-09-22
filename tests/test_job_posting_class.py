@@ -31,6 +31,10 @@ class TestJobPosting(unittest.TestCase):
             self.info["recruiter_uid"],
             self.info["contact_uid"]
         )
+
+        self.new_description = "Testing!!!"
+        self.total_of_job_postings = 1
+
         # Setting up the DB
         db = SQL()
         db.create_db()
@@ -56,6 +60,19 @@ class TestJobPosting(unittest.TestCase):
     def test_add_job_posting_to_db(self):
         self.job_posting.add_job_posting_to_db()
         self.assertTrue(self.job_posting.uid)
+
+    def test_update_job_posting_in_db(self):
+        test_class = self.job_posting.get_a_job_posting(1)[0]
+        test_class.description = self.new_description
+        test_class.update_job_posting_in_db()
+        test_class = self.job_posting.get_a_job_posting(1)[0]
+        self.assertEqual(test_class.description, self.new_description)
+
+    def test_delete_job_posting_in_db(self):
+        test_class = self.job_posting.get_a_job_posting(1)[0]
+        test_class.delete_job_posting_in_db()
+        list_of_job_postings = self.job_posting.get_all_job_postings()
+        self.assertEqual(len(list_of_job_postings), self.total_of_job_postings - 1)
 
 if __name__ == "__main__":
     unittest.main()
