@@ -54,10 +54,10 @@ class Company(SQLModule):
         # Make sure that the Company does not already exist
         assert self.uid == ""
 
-        self.insert_row_into_db(Company.table_name, Company.columns, self.values)
+        self._insert_row_into_db(Company.table_name, Company.columns, self.values)
 
         # updating the uid for the current object
-        self.uid = self.get_id_of_last_row(Company.table_name)
+        self.uid = self._get_id_of_last_row(Company.table_name)
 
     def update_company_in_db(self):
         if not self.db:
@@ -66,7 +66,7 @@ class Company(SQLModule):
         # make sure tht the Company does exist in the
         assert not self.uid == ""
 
-        self.update_row_in_db(Company.table_name, Company.columns, self.values_with_id)
+        self._update_row_in_db(Company.table_name, Company.columns, self.values_with_id)
 
     def delete_company_in_db(self):
         if not self.db:
@@ -75,7 +75,7 @@ class Company(SQLModule):
         # Make sure that the Company exists
         assert not self.uid == ""
 
-        self.delete_row_in_db(Company.table_name, (self.uid,))
+        self._delete_row_in_db(Company.table_name, (self.uid,))
 
     def __str__(self):
         return """

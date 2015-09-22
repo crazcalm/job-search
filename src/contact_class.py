@@ -49,10 +49,10 @@ class Contact(Person):
         # make sure that the object is not in the db
         assert self.uid == ""
 
-        self.insert_row_into_db(Contact.table_name, Contact.columns, self.values)
+        self._insert_row_into_db(Contact.table_name, Contact.columns, self.values)
 
         # update this objects uid
-        self.uid = self.get_id_of_last_row(Contact.table_name)
+        self.uid = self._get_id_of_last_row(Contact.table_name)
 
     def update_contact_in_db(self):
         if not self.db:
@@ -61,7 +61,7 @@ class Contact(Person):
         # making sure that the object is in the db
         assert not self.uid == ""
 
-        self.update_row_in_db(Contact.table_name, Contact.columns, self.values_with_uid)
+        self._update_row_in_db(Contact.table_name, Contact.columns, self.values_with_uid)
 
     def delete_contact_in_db(self):
         if not self.db:
@@ -70,7 +70,7 @@ class Contact(Person):
         # making sure that the object is in the db
         assert not self.uid == ""
 
-        self.delete_row_in_db(Contact.table_name, (self.uid,))
+        self._delete_row_in_db(Contact.table_name, (self.uid,))
 
     def __str__(self):
         return """

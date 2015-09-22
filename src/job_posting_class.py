@@ -56,10 +56,10 @@ class JobPosting(SQLModule):
         # make sure object is not in db
         assert self.uid == ""
 
-        self.insert_row_into_db(JobPosting.table_name, JobPosting.columns, self.values)
+        self._insert_row_into_db(JobPosting.table_name, JobPosting.columns, self.values)
 
         # need to update the uid on this object
-        self.uid = self.get_id_of_last_row(JobPosting.table_name)
+        self.uid = self._get_id_of_last_row(JobPosting.table_name)
 
     def update_job_posting_in_db(self):
         if not self.db:
@@ -68,7 +68,7 @@ class JobPosting(SQLModule):
         # make sure this object is in the db
         assert not self.uid == ""
 
-        self.update_row_in_db(JobPosting.table_name, JobPosting.columns, self.values_with_uid)
+        self._update_row_in_db(JobPosting.table_name, JobPosting.columns, self.values_with_uid)
 
     def delete_job_posting_in_db(self):
         if not self.db:
@@ -77,7 +77,7 @@ class JobPosting(SQLModule):
         # make sure this object is in the db
         assert not self.uid == ""
 
-        self.delete_row_in_db(JobPosting.table_name, (self.uid,))
+        self._delete_row_in_db(JobPosting.table_name, (self.uid,))
 
     def __str__(self):
         return """

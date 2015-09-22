@@ -57,10 +57,10 @@ class Recruiter(Person):
         # make sure object is not in the db
         assert self.uid == ""
 
-        self.insert_row_into_db(Recruiter.table_name, Recruiter.columns, self.values)
+        self._insert_row_into_db(Recruiter.table_name, Recruiter.columns, self.values)
 
         # update the uid for current object
-        self.uid = self.get_id_of_last_row(Recruiter.table_name)
+        self.uid = self._get_id_of_last_row(Recruiter.table_name)
 
     def update_recruiter_in_db(self):
         if not self.db:
@@ -69,7 +69,7 @@ class Recruiter(Person):
         # make sure that the object is in the db
         assert not self.uid == ""
 
-        self.update_row_in_db(Recruiter.table_name, Recruiter.columns, self.values_with_uid)
+        self._update_row_in_db(Recruiter.table_name, Recruiter.columns, self.values_with_uid)
 
     def delete_recruiter_in_db(self):
         if not self.db:
@@ -78,7 +78,7 @@ class Recruiter(Person):
         # make sure that the object is in the db
         assert  not self.uid == ""
 
-        self.delete_row_in_db(Recruiter.table_name, (self.uid,))
+        self._delete_row_in_db(Recruiter.table_name, (self.uid,))
 
     def __str__(self):
         return """

@@ -29,7 +29,7 @@ class SQLModule:
     def init_db(self, db_path=TEST_DB):
         self.db = PracticalSQL(db_path)
 
-    def update_row_in_db(self, table_name, columns, values):
+    def _update_row_in_db(self, table_name, columns, values):
         columns_string = "=?, ".join(columns) + "=? "
         query = """
         UPDATE {}
@@ -40,7 +40,7 @@ class SQLModule:
         self.db.conn.execute(query, values)
         self.db.conn.commit()
 
-    def insert_row_into_db(self, table_name, columns, values):
+    def _insert_row_into_db(self, table_name, columns, values):
         columns_string = "(" + ", ".join(columns) + ")"
         value_placeholder = "(" + "?, " * (len(columns) - 1) + "?)"
         query = """
@@ -51,7 +51,7 @@ class SQLModule:
         self.db.conn.execute(query, values)
         self.db.conn.commit()
 
-    def delete_row_in_db(self, table_name, uid):
+    def _delete_row_in_db(self, table_name, uid):
         query = """
         DELETE FROM {}
         WHERE id=?
@@ -60,7 +60,7 @@ class SQLModule:
         self.db.conn.execute(query, uid)
         self.db.conn.commit()
 
-    def get_id_of_last_row(self, table_name):
+    def _get_id_of_last_row(self, table_name):
         query = """
         SELECT id
         FROM {}
