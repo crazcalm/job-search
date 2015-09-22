@@ -79,11 +79,10 @@ class Company(SQLModule):
 
     def __str__(self):
         return """
-        uid: {}
         name: {}
         address: {}
         website: {}
-        phone: {}""".format(self.uid, self.name, self.address, self.website, self.phone)
+        phone: {}""".format(self.name, self.address, self.website, self.phone)
 
 if __name__ == "__main__":
     test = Company(name="DavidInc")

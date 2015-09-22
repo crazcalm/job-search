@@ -15,7 +15,15 @@ def update_class(class_object, properties):
     print(class_object)
 
 
+def print_to_screen(list_of_class, verbose=False):
+    for index, item in enumerate(list_of_class):
+        print("{}: {}\n\n".format(index + 1, item))
+
+
 if __name__ == "__main__":
     test_class = Company()
-    testing = test_class.get_a_company(1)[0]
-    update_class(testing, Company.columns)
+    test = test_class.get_all_companies()
+    print_to_screen(test)
+
+    #testing = test_class.get_a_company(1)[0]
+    #update_class(testing, Company.columns)

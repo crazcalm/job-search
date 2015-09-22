@@ -82,7 +82,6 @@ class Recruiter(Person):
 
     def __str__(self):
         return """
-        uid: {}
         first name: {}
         last_name: {}
         email: {}
@@ -90,7 +89,7 @@ class Recruiter(Person):
         description: {}
         company_uid: {}
         job posting uid: {}""".format(
-            self.uid, self.first_name, self.last_name, self.email, self.phone, self.description,
+            self.first_name, self.last_name, self.email, self.phone, self.description,
             self.company_uid, self.job_posting_uid)
 
 if __name__ == "__main__":

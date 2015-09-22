@@ -81,7 +81,6 @@ class JobPosting(SQLModule):
 
     def __str__(self):
         return """
-        uid: {}
         link: {}
         date applied: {}
         description: {}
@@ -89,7 +88,7 @@ class JobPosting(SQLModule):
         company_uid: {}
         recruiter_uid: {}
         contact_uid: {}""".format(
-            self.uid, self.link, self.date_applied, self.description, self.interviewed,
+            self.link, self.date_applied, self.description, self.interviewed,
             self.company_uid, self.recruiter_uid, self.contact_uid)
 
 
