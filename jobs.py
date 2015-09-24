@@ -4,32 +4,27 @@ from src.company_class import Company
 from src.contact_class import Contact
 from src.recruiter_class import Recruiter
 from src.job_posting_class import JobPosting
-
-JOB_POSTING = "job_posting"
-RECRUITER = "recruiter"
-CONTACT = "contact"
-COMPANY = "company"
-
-choices = [COMPANY, CONTACT, RECRUITER, JOB_POSTING]
+from src.constants import CHOICES, CHOICES_PLURAL, JOB_POSTINGS
 
 CLASSES = {
-    "company": {
+    "companies": {
         "class": Company,
         "get_all": "get_all_companies"
     },
-    "contact": {
+    "contacts": {
         "class": Contact,
         "get_all": "get_all_contacts"
     },
-    "recruiter": {
+    "recruiters": {
         "class": Recruiter,
         "get_all": "get_all_recruiters"
     },
-    "job_posting": {
+    "job_postings": {
         "class": JobPosting,
         "get_all": "get_all_job_postings"
     }
 }
+
 
 
 def show(class_type):
@@ -51,9 +46,9 @@ def main():
     jobs.add_argument("-v", action="store_true", help="verbose help")
     group = jobs.add_mutually_exclusive_group()
 
-    group.add_argument("--add", choices=choices, help="add help")
-    group.add_argument("--show", choices=choices, help="show help")
-    group.add_argument("--update", choices=choices, help="update help")
+    group.add_argument("--add", choices=CHOICES, help="add help")
+    group.add_argument("--show", choices=CHOICES_PLURAL, help="show help")
+    group.add_argument("--update", choices=CHOICES, help="update help")
 
     cli_args = jobs.parse_args()
 
@@ -73,7 +68,7 @@ def main():
     else:
         print("nothing was selected")
         print("I will print out the job postings")
-        print_to_screen(show(JOB_POSTING))
+        print_to_screen(show(JOB_POSTINGS))
 
     print(cli_args)
 
