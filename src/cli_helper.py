@@ -23,6 +23,34 @@ TYPE_TO_GET_ALL_METHOD_MAPPING = {
     "JobPosting": "get_all_job_postings"
 }
 
+CLASSES = {
+    "companies": {
+        "class": Company,
+        "get_all": "get_all_companies"
+    },
+    "contacts": {
+        "class": Contact,
+        "get_all": "get_all_contacts"
+    },
+    "recruiters": {
+        "class": Recruiter,
+        "get_all": "get_all_recruiters"
+    },
+    "job_postings": {
+        "class": JobPosting,
+        "get_all": "get_all_job_postings"
+    }
+}
+
+
+def show(class_type):
+    result = None
+    if class_type in CLASSES:
+        class_info = CLASSES.get(class_type)
+        instance = class_info.get("class")()
+        result = getattr(instance, class_info.get("get_all"))()
+    return result
+
 
 def class_factory(class_name, mapping=CLASS_MAPPING):
     return mapping.get(class_name)()

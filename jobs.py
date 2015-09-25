@@ -1,44 +1,7 @@
 import argparse
 
-from src.company_class import Company
-from src.contact_class import Contact
-from src.recruiter_class import Recruiter
-from src.job_posting_class import JobPosting
 from src.constants import CHOICES, CHOICES_PLURAL, JOB_POSTINGS
-
-CLASSES = {
-    "companies": {
-        "class": Company,
-        "get_all": "get_all_companies"
-    },
-    "contacts": {
-        "class": Contact,
-        "get_all": "get_all_contacts"
-    },
-    "recruiters": {
-        "class": Recruiter,
-        "get_all": "get_all_recruiters"
-    },
-    "job_postings": {
-        "class": JobPosting,
-        "get_all": "get_all_job_postings"
-    }
-}
-
-
-
-def show(class_type):
-    result = None
-    if class_type in CLASSES:
-        class_info = CLASSES.get(class_type)
-        instance = class_info.get("class")()
-        result = getattr(instance, class_info.get("get_all"))()
-    return result
-
-
-def print_to_screen(items):
-    for index, item in enumerate(items):
-        print("{}: {}".format(index, item))
+from src.cli_helper import print_to_screen, show
 
 
 def main():
@@ -75,4 +38,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
