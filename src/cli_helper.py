@@ -3,43 +3,40 @@ try:
     from src.contact_class import Contact
     from src.recruiter_class import Recruiter
     from src.job_posting_class import JobPosting
+    from src.constants import CONTACT, COMPANY, RECRUITER, JOB_POSTING
+    from src.constants import CONTACTS, COMPANIES, RECRUITERS, JOB_POSTINGS
 except ImportError:
     from company_class import Company
     from contact_class import Contact
     from recruiter_class import Recruiter
     from job_posting_class import JobPosting
+    from constants import CONTACT, COMPANY, RECRUITER, JOB_POSTING
+    from constants import CONTACTS, COMPANIES, RECRUITERS, JOB_POSTINGS
 
 CLASS_MAPPING = {
-    "company": Company,
-    "contact": Contact,
-    "recruiter": Recruiter,
-    "job_posting": JobPosting
-}
-
-TYPE_TO_GET_ALL_METHOD_MAPPING = {
-    "Company": "get_all_companies",
-    "Contact": "get_all_contacts",
-    "Recruiter": "get_all_recruiters",
-    "JobPosting": "get_all_job_postings"
-}
-
-CLASSES_PLURAL_MAPPING = {
-    "companies": {
+    COMPANY: {
         "class": Company,
         "get_all": "get_all_companies"
     },
-    "contacts": {
+    CONTACT: {
         "class": Contact,
         "get_all": "get_all_contacts"
     },
-    "recruiters": {
+    Recruiter: {
         "class": Recruiter,
         "get_all": "get_all_recruiters"
     },
-    "job_postings": {
+    JOB_POSTING: {
         "class": JobPosting,
         "get_all": "get_all_job_postings"
     }
+}
+
+CLASSES_PLURAL_MAPPING = {
+    COMPANIES: CLASS_MAPPING.get(COMPANY),
+    CONTACTS: CLASS_MAPPING.get(CONTACT),
+    RECRUITERS: CLASS_MAPPING.get(RECRUITER),
+    JOB_POSTINGS: CLASS_MAPPING.get(JOB_POSTING)
 }
 
 
@@ -53,15 +50,15 @@ def show(class_type):
 
 
 def class_factory(class_name, mapping=CLASS_MAPPING):
-    return mapping.get(class_name)()
+    return mapping.get(class_name).get("class")()
 
 
 def get_all_objects_in_db(class_object):
     # Parsing the type string to get the class name
-    class_name = str(type(class_object)).split(".")[-1][:-2]
+    class_name = str(type(class_object)).split(".")[-1][:-2].lower()
 
     # getting the needed method name
-    method_name = TYPE_TO_GET_ALL_METHOD_MAPPING.get(class_name)
+    method_name = CLASS_MAPPING.get(class_name).get("get_all")
 
     return getattr(class_object, method_name)()
 
@@ -97,16 +94,16 @@ def selection_screen(list_of_classes):
     return list_of_classes[user_input]
 
 if __name__ == "__main__":
-    testing = class_factory("company")
+    #testing = class_factory("company")
 
-    list_of_objects = get_all_objects_in_db(testing)
+    #list_of_objects = get_all_objects_in_db(testing)
 
     #print_to_screen(list_of_objects)
-    print(selection_screen(list_of_objects))
+    #print(selection_screen(list_of_objects))
 
-    #test_class = Company()
-    #test = test_class.get_all_companies()
-    #print_to_screen(test)
+    test_class = Company()
+    test = test_class.get_all_companies()
+    print_to_screen(test)
 
     #testing = test_class.get_a_company(1)[0]
     #update_class(testing, Company.columns)
