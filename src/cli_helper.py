@@ -23,7 +23,7 @@ TYPE_TO_GET_ALL_METHOD_MAPPING = {
     "JobPosting": "get_all_job_postings"
 }
 
-CLASSES = {
+CLASSES_PLURAL_MAPPING = {
     "companies": {
         "class": Company,
         "get_all": "get_all_companies"
@@ -45,8 +45,8 @@ CLASSES = {
 
 def show(class_type):
     result = None
-    if class_type in CLASSES:
-        class_info = CLASSES.get(class_type)
+    if class_type in CLASSES_PLURAL_MAPPING:
+        class_info = CLASSES_PLURAL_MAPPING.get(class_type)
         instance = class_info.get("class")()
         result = getattr(instance, class_info.get("get_all"))()
     return result
@@ -77,18 +77,32 @@ def update_class(class_object, properties):
     print(class_object)
 
 
-def print_to_screen(list_of_class, verbose=False):
-    for index, item in enumerate(list_of_class):
+def print_to_screen(list_of_classes, verbose=False):
+    for index, item in enumerate(list_of_classes):
         print("{}: {}\n\n".format(index + 1, item))
 
+
+def selection_screen(list_of_classes):
+    user_input = None
+    while not user_input:
+        print_to_screen(list_of_classes)
+        tempt = input("Enter the number of the class that you to select: ")
+
+        try:
+            user_input = int(tempt) - 1
+        except ValueError:
+            print("{} is not a valid input. Hit enter to continue.".format(tempt))
+            input()
+
+    return list_of_classes[user_input]
 
 if __name__ == "__main__":
     testing = class_factory("company")
 
     list_of_objects = get_all_objects_in_db(testing)
 
-    print_to_screen(list_of_objects)
-
+    #print_to_screen(list_of_objects)
+    print(selection_screen(list_of_objects))
 
     #test_class = Company()
     #test = test_class.get_all_companies()
