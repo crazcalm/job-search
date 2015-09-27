@@ -16,6 +16,10 @@ class Recruiter(Person):
         self.job_posting_uid = job_posting_uid
 
     @property
+    def properties_with_uid(self):
+        return Recruiter.columns_with_uid
+
+    @property
     def values(self):
         return self.first_name, self.last_name, self.email, self.phone, self.description, self.company_uid
 

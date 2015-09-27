@@ -1,7 +1,7 @@
 import argparse
 
 from src.constants import CHOICES, CHOICES_PLURAL, JOB_POSTINGS
-from src.cli_helper import print_to_screen, show
+from src.cli_helper import print_to_screen, show, class_factory, get_all_objects_in_db, selection_screen, update_class
 
 
 def main():
@@ -18,6 +18,10 @@ def main():
     if cli_args.add:
         print("add was selected")
         print("add: ", cli_args.add)
+        class_object = class_factory(cli_args.add)
+
+        # Need to figure this out...
+        update_class(class_object, class_object.properties_with_uid)
 
     elif cli_args.show:
         print("show was selected")

@@ -18,6 +18,10 @@ class Company(SQLModule):
         self.phone = phone
 
     @property
+    def properties_with_uid(self):
+        return "uid", "name", "address", "website", "phone"
+
+    @property
     def values(self):
         return self.name, self.address, self.website, self.phone
 

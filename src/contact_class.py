@@ -14,6 +14,10 @@ class Contact(Person):
         super().__init__(uid, first_name, last_name, email, phone, description, company_uid)
 
     @property
+    def properties_with_uid(self):
+        return Contact.columns_with_uid
+
+    @property
     def values(self):
         return self.first_name, self.last_name, self.email, self.phone, self.description, self.company_uid
 
