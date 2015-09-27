@@ -15,7 +15,7 @@ class Contact(Person):
 
     @property
     def properties_with_uid(self):
-        return Contact.columns_with_uid
+        return "uid", "first_name", "last_name", "email", "phone", "description", "company_uid"
 
     @property
     def values(self):

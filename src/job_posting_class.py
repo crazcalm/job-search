@@ -25,7 +25,8 @@ class JobPosting(SQLModule):
 
     @property
     def properties_with_uid(self):
-        return JobPosting.columns_with_uid
+        return ("uid", "link", "date_applied", "description", "interviewed", "company_uid", "recruiter_uid",
+                        "contact_uid")
 
     @property
     def values(self):
