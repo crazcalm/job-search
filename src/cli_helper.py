@@ -67,7 +67,7 @@ def update_class(class_object, properties):
     print("Pressing enter will leave the value unchanged.\n")
     for prop in properties:
         value = getattr(class_object, prop)
-        new_value = input("\nCurrent value: {}\nEnter new value: ".format(value))
+        new_value = input("\nCurrent value of {}: {}\nEnter new value: ".format(prop, value))
 
         if new_value:
             setattr(class_object, prop, new_value)

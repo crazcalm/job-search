@@ -31,6 +31,11 @@ def main():
     elif cli_args.update:
         print("update was selected")
         print("update:", cli_args.update)
+        class_object = class_factory(cli_args.update)
+        all_classes = get_all_objects_in_db(class_object)
+        wanted_class_object = selection_screen(all_classes)
+        update_class(wanted_class_object, wanted_class_object.properties_with_uid)
+
 
     else:
         print("nothing was selected")
