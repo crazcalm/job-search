@@ -22,7 +22,7 @@ CLASS_MAPPING = {
         "class": Contact,
         "get_all": "get_all_contacts"
     },
-    Recruiter: {
+    RECRUITER: {
         "class": Recruiter,
         "get_all": "get_all_recruiters"
     },
