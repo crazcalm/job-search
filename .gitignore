@@ -1,4 +1,4 @@
 .idea/*
-*/test*
+*/test.db
 *.pyc
 */__pycache__/*
