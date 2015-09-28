@@ -85,6 +85,8 @@ def get_all_objects_in_db(class_object):
     return getattr(class_object, method_name)()
 
 
+# Need to add filtering on the properties so that
+# x,y,z properties lead to a selection screen for those class objects
 def update_class(class_object, properties):
     """
     This function controls the loop that updates the properties of a class.
@@ -103,6 +105,9 @@ def update_class(class_object, properties):
     print(class_object)
 
 
+# Need to add the get_other_classes_methods to the classes that
+# reference other classes. After that, I need to implement the verbose
+# functionality, which will print the object in question and the linked objects
 def print_to_screen(list_of_classes, verbose=False):
     """
     This function prints the objects to the screen.
