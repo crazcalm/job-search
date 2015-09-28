@@ -35,7 +35,6 @@ class CliHelper(unittest.TestCase):
 
     def test_get_all_objects_in_db(self):
         for item in self.classes:
-            print("class:", item)
             self.assertTrue(isinstance(get_all_objects_in_db(item()), list))
 
 

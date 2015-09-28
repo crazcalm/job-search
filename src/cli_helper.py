@@ -41,19 +41,41 @@ CLASSES_PLURAL_MAPPING = {
 
 
 def show(class_type):
+    """
+    This function is used to get the list of all the objects in the database of a
+    specific class.
+
+    :param class_type: str - Lowercase string of the plural form of the class name
+    :return: list of class instances or None
+    """
     result = None
     if class_type in CLASSES_PLURAL_MAPPING:
         class_info = CLASSES_PLURAL_MAPPING.get(class_type)
         instance = class_info.get("class")()
-        result = getattr(instance, class_info.get("get_all"))()
+        result = get_all_objects_in_db(instance)
     return result
 
 
 def class_factory(class_name, mapping=CLASS_MAPPING):
+    """
+    This function takes a lowercase string version of the class name and returns
+    an instance of that class.
+
+    :param class_name: str - Lowercase string of the class name
+    :param mapping: dict - maps the string the to class
+    :return: class instance
+    """
     return mapping.get(class_name).get("class")()
 
 
 def get_all_objects_in_db(class_object):
+    """
+    This function takes an instance of the class and returns a list
+    of objects from the database.
+
+    :param class_object: class instance
+    :return: list of class instances
+    """
     # Parsing the type string to get the class name
     class_name = str(type(class_object)).split(".")[-1][:-2].lower()
 
@@ -64,6 +86,13 @@ def get_all_objects_in_db(class_object):
 
 
 def update_class(class_object, properties):
+    """
+    This function controls the loop that updates the properties of a class.
+
+    :param class_object: class instance
+    :param properties: tuple of properties to update
+    :return: None
+    """
     print("Pressing enter will leave the value unchanged.\n")
     for prop in properties:
         value = getattr(class_object, prop)
@@ -75,11 +104,25 @@ def update_class(class_object, properties):
 
 
 def print_to_screen(list_of_classes, verbose=False):
+    """
+    This function prints the objects to the screen.
+
+    :param list_of_classes: list of class instances
+    :param verbose: Boolean
+    :return: None
+    """
     for index, item in enumerate(list_of_classes):
         print("{}: {}\n\n".format(index + 1, item))
 
 
 def selection_screen(list_of_classes):
+    """
+    This function controls the selection screen used allow the
+    user to select a class instance from a list of class instances.
+
+    :param list_of_classes: list of class objects
+    :return: None
+    """
     user_input = None
     while not user_input:
         print_to_screen(list_of_classes)
@@ -94,16 +137,4 @@ def selection_screen(list_of_classes):
     return list_of_classes[user_input]
 
 if __name__ == "__main__":
-    #testing = class_factory("company")
-
-    #list_of_objects = get_all_objects_in_db(testing)
-
-    #print_to_screen(list_of_objects)
-    #print(selection_screen(list_of_objects))
-
-    test_class = Company()
-    test = test_class.get_all_companies()
-    print_to_screen(test)
-
-    #testing = test_class.get_a_company(1)[0]
-    #update_class(testing, Company.columns)
+    pass

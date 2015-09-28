@@ -36,7 +36,6 @@ def main():
         wanted_class_object = selection_screen(all_classes)
         update_class(wanted_class_object, wanted_class_object.properties_with_uid)
 
-
     else:
         print("nothing was selected")
         print("I will print out the job postings")
