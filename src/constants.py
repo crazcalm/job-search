@@ -122,8 +122,8 @@ JOB_POSTING_DATA = [
 
 DB_TEST_DATA = [COMPANY_DATA, CONTACTS_DATA, RECRUITERS_DATA, JOB_POSTING_DATA]
 
-JOB_POSTING = "job_posting"
-JOB_POSTINGS = "job_postings"
+JOB_POSTING = "jobposting"
+JOB_POSTINGS = "jobpostings"
 RECRUITER = "recruiter"
 RECRUITERS = "recruiters"
 CONTACT = "contact"
