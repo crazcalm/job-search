@@ -1,7 +1,9 @@
 try:
     from src.base_classes import Person
+    from src.job_posting_class import JobPosting
 except ImportError:
     from base_classes import Person
+    from job_posting_class import JobPosting
 
 
 # Note: a recruiter can have many job postings
@@ -13,9 +15,8 @@ class Recruiter(Person):
     columns_with_uid = tuple(_column)
 
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
-                 company_uid=None, job_posting_uid=None):
+                 company_uid=None):
         super().__init__(uid, first_name, last_name, email, phone, description, company_uid)
-        self.job_posting_uid = job_posting_uid
 
     @property
     def properties(self):
@@ -32,6 +33,21 @@ class Recruiter(Person):
     @property
     def values_with_uid(self):
         return self.first_name, self.last_name, self.email, self.phone, self.description, self.company_uid, self.uid
+
+    @property
+    def job_postings(self):
+        if not self.db:
+            self.init_db()
+
+        table_name = "job_posting"
+        query = """
+        SELECT *
+        FROM {}
+        WHERE recruiterId=?
+        """.format(table_name)
+
+        results = self.db.conn.execute(query, (self.uid,))
+        return [JobPosting(*item) for item in results]
 
     def get_all_recruiters(self):
         if not self.db:
@@ -98,12 +114,13 @@ class Recruiter(Person):
         phone: {}
         description: {}
         company_uid: {}
-        job posting uid: {}""".format(
+        number of job posting: {}""".format(
             self.first_name, self.last_name, self.email, self.phone, self.description,
-            self.company_uid, self.job_posting_uid)
+            self.company_uid, len(self.job_postings))
 
 if __name__ == "__main__":
     test = Recruiter(first_name="Marcus")
-    for item in test.get_all_recruiters():
-        print(item)
+    testing = test.get_a_recruiter(1)[0]
+    print(testing)
+    print(testing.job_postings[0])
 
