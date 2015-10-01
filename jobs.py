@@ -21,7 +21,7 @@ def main():
         class_object = class_factory(cli_args.add)
 
         # Need to figure this out...
-        update_class(class_object, class_object.properties_with_uid)
+        update_class(class_object, class_object.properties)
 
     elif cli_args.show:
         print("show was selected")
@@ -34,7 +34,7 @@ def main():
         class_object = class_factory(cli_args.update)
         all_classes = get_all_objects_in_db(class_object)
         wanted_class_object = selection_screen(all_classes)
-        update_class(wanted_class_object, wanted_class_object.properties_with_uid)
+        update_class(wanted_class_object, wanted_class_object.properties)
 
     else:
         print("nothing was selected")
