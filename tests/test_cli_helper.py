@@ -50,6 +50,5 @@ class CliHelper(unittest.TestCase):
                 self.assertTrue(prop not in self.prop_references)
 
 
-
 if __name__ == "__main__":
     unittest.main()

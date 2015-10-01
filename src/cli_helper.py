@@ -39,6 +39,24 @@ CLASSES_PLURAL_MAPPING = {
     JOB_POSTINGS: CLASS_MAPPING.get(JOB_POSTING)
 }
 
+def _get_a_class_instance(class_name, uid):
+    class_object = class_factory(class_name)
+    wanted_class = None
+
+    if class_name in CLASS_MAPPING:
+        if class_name == COMPANY:
+            wanted_class = class_object.get_a_company(uid)
+
+        elif class_name == Contact:
+            wanted_class = class_object.get_a_contact(uid)
+
+        elif class_name == RECRUITER:
+            wanted_class = class_object.get_a_recruiter(uid)
+
+        else:
+            wanted_class = class_object.get_a_job_posting(uid)
+    return wanted_class
+
 
 def show(class_type):
     """
@@ -109,12 +127,23 @@ def update_class(class_object, properties):
     print("class_properties:", class_properties)
     print("class_properties_references:", class_properties_references)
 
-    for prop in class_properties:
+    for prop in properties:
+
+    if prop in class_properties:
         value = getattr(class_object, prop)
         new_value = input("\nCurrent value of {}: {}\nEnter new value: ".format(prop, value))
 
         if new_value:
             setattr(class_object, prop, new_value)
+
+    # print out current referenced class
+    # add a check for None
+    # Ask the user if they want to change the object referenced
+    # add the selection process
+    # note: I need to take "id" out of the property list.
+    if prop in class_properties_references:
+        class_name = prop.split("_")[0]
+        wanted_instance = _get_a_class_instance(class_name, getattr(class_object, prop))
     print(class_object)
 
 
