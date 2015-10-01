@@ -5,9 +5,10 @@ except ImportError:
 
 
 class Company(SQLModule):
+    _columns = ["id", "name", "address", "website", "phone"]
     table_name = "company"
-    columns = ("name", "address", "website", "phone")
-    columns_with_uid = ("id", "name", "address", "website", "phone")
+    columns = tuple(_columns[1:])
+    columns_with_uid = tuple(_columns)
 
     def __init__(self, uid="", name="", address="", website="", phone=""):
         super().__init__()
@@ -70,6 +71,7 @@ class Company(SQLModule):
         # make sure tht the Company does exist in the
         assert not self.uid == ""
 
+        print(Company.columns)
         self._update_row_in_db(Company.table_name, Company.columns, self.values_with_id)
 
     def delete_company_in_db(self):
@@ -90,3 +92,4 @@ class Company(SQLModule):
 
 if __name__ == "__main__":
     test = Company(name="DavidInc")
+    print(test.columns)

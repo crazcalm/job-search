@@ -6,9 +6,11 @@ except ImportError:
 
 # Note: a recruiter can have many job postings
 class Recruiter(Person):
+    _column = ["id", "first_name", "last_name", "email", "phone", "description", "companyId"]
+
     table_name = "recruiters"
-    columns = ("first_name", "last_name", "email", "phone", "description", "companyId")
-    columns_with_uid = ("id", "first_name", "last_name", "email", "phone", "description", "companyId")
+    columns = tuple(_column[1:])
+    columns_with_uid = tuple(_column)
 
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
                  company_uid=None, job_posting_uid=None):

@@ -5,9 +5,11 @@ except ImportError:
 
 
 class Contact(Person):
+    _columns = ["id", "first_name", "last_name", "email", "phone", "description", "companyId"]
+
     table_name = "contacts"
-    columns = ("first_name", "last_name", "email", "phone", "description", "companyId")
-    columns_with_uid = ("id", "first_name", "last_name", "email", "phone", "description", "companyId")
+    columns = tuple(_columns[1:])
+    columns_with_uid = tuple(_columns)
 
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
                  company_uid=None):

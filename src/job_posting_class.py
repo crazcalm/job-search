@@ -5,11 +5,12 @@ except ImportError:
 
 
 class JobPosting(SQLModule):
+    _columns = ["id", "link", "date_applied", "description", "interviewed", "companyId", "recruiterId",
+                        "contactId"]
 
     table_name = "job_posting"
-    columns = ("link", "date_applied", "description", "interviewed", "companyId", "recruiterId", "contactId")
-    columns_with_uid = ("id", "link", "date_applied", "description", "interviewed", "companyId", "recruiterId",
-                        "contactId")
+    columns = tuple(_columns[1:])
+    columns_with_uid = tuple(_columns)
 
     def __init__(self, uid="", link="", date_applied="", description="", interviewed="",
                  company_uid=None, recruiter_uid=None, contact_uid=None):
