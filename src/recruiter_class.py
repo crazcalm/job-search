@@ -19,7 +19,7 @@ class Recruiter(Person):
 
     @property
     def properties_with_uid(self):
-        return "uid", "id", "first_name", "last_name", "email", "phone", "description", "company_uid"
+        return "uid", "first_name", "last_name", "email", "phone", "description", "company_uid"
 
     @property
     def values(self):

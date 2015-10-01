@@ -90,6 +90,7 @@ def _segregate_properties(properties):
     class_properties_references = [prop for prop in properties if prop not in class_properties]
     return class_properties, class_properties_references
 
+
 # Need to add filtering on the properties so that
 # x,y,z properties lead to a selection screen for those class objects
 def update_class(class_object, properties):
@@ -154,5 +155,5 @@ def selection_screen(list_of_classes):
     return list_of_classes[user_input]
 
 if __name__ == "__main__":
-    test = JobPosting()
+    test = Recruiter()
     update_class(test, test.properties_with_uid)
