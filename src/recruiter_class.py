@@ -120,7 +120,7 @@ class Recruiter(Person):
 
 if __name__ == "__main__":
     test = Recruiter(first_name="Marcus")
-    testing = test.get_a_recruiter(1)[0]
+    testing = test.get_a_recruiter(2)[0]
     print(testing)
-    print(testing.job_postings[0])
+    #print(testing.job_postings[0])
 

@@ -16,19 +16,27 @@ except ImportError:
 CLASS_MAPPING = {
     COMPANY: {
         "class": Company,
-        "get_all": "get_all_companies"
+        "get_all": "get_all_companies",
+        "add_to_db": "add_company_to_db",
+        "update_in_db": "update_company_in_db"
     },
     CONTACT: {
         "class": Contact,
-        "get_all": "get_all_contacts"
+        "get_all": "get_all_contacts",
+        "add_to_db": "add_contact_to_db",
+        "update_in_db": "update_contact_in_db"
     },
     RECRUITER: {
         "class": Recruiter,
-        "get_all": "get_all_recruiters"
+        "get_all": "get_all_recruiters",
+        "add_to_db": "add_recruiter_to_db",
+        "update_in_db": "update_recruiter_in_db"
     },
     JOB_POSTING: {
         "class": JobPosting,
-        "get_all": "get_all_job_postings"
+        "get_all": "get_all_job_postings",
+        "add_to_db": "add_job_posting_to_db",
+        "update_in_db": "update_job_posting_in_db"
     }
 }
 
@@ -57,6 +65,23 @@ def _get_a_class_instance(class_name, uid):
         else:
             wanted_class = class_object.get_a_job_posting(uid)
     return wanted_class
+
+
+def _get_class_name_from_class_instance(class_object):
+    return str(type(class_object)).split(".")[-1][:-2].lower()
+
+
+def save_class_object(class_object):
+    class_name = _get_class_name_from_class_instance(class_object)
+    class_info = CLASS_MAPPING[class_name]
+
+    if class_object.uid:
+        method_name = class_info['update_in_db']
+        getattr(class_object, method_name)()
+
+    else:
+        method_name = class_info['add_to_db']
+        getattr(class_object, method_name)()
 
 
 def show(class_type):
@@ -96,7 +121,7 @@ def get_all_objects_in_db(class_object):
     :return: list of class instances
     """
     # Parsing the type string to get the class name
-    class_name = str(type(class_object)).split(".")[-1][:-2].lower()
+    class_name = _get_class_name_from_class_instance(class_object)
 
     # getting the needed method name
     method_name = CLASS_MAPPING.get(class_name).get("get_all")
@@ -137,10 +162,6 @@ def update_class(class_object, properties):
             if new_value:
                 setattr(class_object, prop, new_value)
 
-        # print out current referenced class
-        # add a check for None
-        # Ask the user if they want to change the object referenced
-        # add the selection process
         if prop in class_properties_references:
             class_name = prop.split("_")[0]
 
@@ -161,6 +182,7 @@ def update_class(class_object, properties):
                 if selected_class:
                     setattr(class_object, prop, selected_class.uid)
     print(class_object)
+    save_class_object(class_object)
 
 
 # Need to add the get_other_classes_methods to the classes that
