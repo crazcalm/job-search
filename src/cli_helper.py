@@ -85,6 +85,11 @@ def get_all_objects_in_db(class_object):
     return getattr(class_object, method_name)()
 
 
+def _segregate_properties(properties):
+    class_properties = [prop for prop in properties if "uid" not in prop.lower()]
+    class_properties_references = [prop for prop in properties if prop not in class_properties]
+    return class_properties, class_properties_references
+
 # Need to add filtering on the properties so that
 # x,y,z properties lead to a selection screen for those class objects
 def update_class(class_object, properties):
@@ -96,7 +101,14 @@ def update_class(class_object, properties):
     :return: None
     """
     print("Pressing enter will leave the value unchanged.\n")
-    for prop in properties:
+
+    # list of properties with
+    class_properties, class_properties_references = _segregate_properties(properties)
+
+    print("class_properties:", class_properties)
+    print("class_properties_references:", class_properties_references)
+
+    for prop in class_properties:
         value = getattr(class_object, prop)
         new_value = input("\nCurrent value of {}: {}\nEnter new value: ".format(prop, value))
 
@@ -142,4 +154,5 @@ def selection_screen(list_of_classes):
     return list_of_classes[user_input]
 
 if __name__ == "__main__":
-    pass
+    test = JobPosting()
+    update_class(test, test.properties_with_uid)
