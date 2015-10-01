@@ -39,6 +39,7 @@ CLASSES_PLURAL_MAPPING = {
     JOB_POSTINGS: CLASS_MAPPING.get(JOB_POSTING)
 }
 
+
 def _get_a_class_instance(class_name, uid):
     class_object = class_factory(class_name)
     wanted_class = None
@@ -129,21 +130,36 @@ def update_class(class_object, properties):
 
     for prop in properties:
 
-    if prop in class_properties:
-        value = getattr(class_object, prop)
-        new_value = input("\nCurrent value of {}: {}\nEnter new value: ".format(prop, value))
+        if prop in class_properties:
+            value = getattr(class_object, prop)
+            new_value = input("\nCurrent value of {}: {}\nEnter new value: ".format(prop, value))
 
-        if new_value:
-            setattr(class_object, prop, new_value)
+            if new_value:
+                setattr(class_object, prop, new_value)
 
-    # print out current referenced class
-    # add a check for None
-    # Ask the user if they want to change the object referenced
-    # add the selection process
-    # note: I need to take "id" out of the property list.
-    if prop in class_properties_references:
-        class_name = prop.split("_")[0]
-        wanted_instance = _get_a_class_instance(class_name, getattr(class_object, prop))
+        # print out current referenced class
+        # add a check for None
+        # Ask the user if they want to change the object referenced
+        # add the selection process
+        if prop in class_properties_references:
+            class_name = prop.split("_")[0]
+
+            # Check to see of that property has a valid value
+            if getattr(class_object, prop):
+                wanted_instance = _get_a_class_instance(class_name, getattr(class_object, prop))
+                print("Current {}: \n{}".format(class_name, wanted_instance))
+            else:
+                wanted_instance = class_factory(class_name)
+                print("Current {}: \n Is not assigned".format(class_name))
+
+            user_input = input("If you want to change the associated {}, enter 'YES': ".format(class_name))
+
+            if user_input.lower() in ("yes", "y"):
+                # enter the selection process
+                selected_class = selection_screen(get_all_objects_in_db(wanted_instance))
+
+                if selected_class:
+                    setattr(class_object, prop, selected_class.uid)
     print(class_object)
 
 
@@ -171,7 +187,7 @@ def selection_screen(list_of_classes):
     :return: None
     """
     user_input = None
-    while not user_input:
+    while not user_input and user_input != 0:
         print_to_screen(list_of_classes)
         tempt = input("Enter the number of the class that you to select: ")
 
@@ -185,4 +201,4 @@ def selection_screen(list_of_classes):
 
 if __name__ == "__main__":
     test = Recruiter()
-    update_class(test, test.properties_with_uid)
+    update_class(test, test.properties)

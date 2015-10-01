@@ -25,6 +25,10 @@ class JobPosting(SQLModule):
         self.contact_uid = contact_uid
 
     @property
+    def properties(self):
+        return self.properties_with_uid[1:]
+
+    @property
     def properties_with_uid(self):
         return ("uid", "link", "date_applied", "description", "interviewed", "company_uid", "recruiter_uid",
                         "contact_uid")
