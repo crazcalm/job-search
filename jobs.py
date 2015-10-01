@@ -2,6 +2,7 @@ import argparse
 
 from src.constants import CHOICES, CHOICES_PLURAL, JOB_POSTINGS
 from src.cli_helper import print_to_screen, show, class_factory, get_all_objects_in_db, selection_screen, update_class
+from src.cli_helper import delete_class_object
 
 
 def main():
@@ -12,6 +13,7 @@ def main():
     group.add_argument("--add", choices=CHOICES, help="add help")
     group.add_argument("--show", choices=CHOICES_PLURAL, help="show help")
     group.add_argument("--update", choices=CHOICES, help="update help")
+    group.add_argument("--delete", choices=CHOICES, help="delete help")
 
     cli_args = jobs.parse_args()
 
@@ -35,6 +37,14 @@ def main():
         all_classes = get_all_objects_in_db(class_object)
         wanted_class_object = selection_screen(all_classes)
         update_class(wanted_class_object, wanted_class_object.properties)
+
+    elif cli_args.delete:
+        print("delete was selected")
+        print("delete:", cli_args.delete)
+        class_object = class_factory(cli_args.delete)
+        all_classes = get_all_objects_in_db(class_object)
+        wanted_class_object = selection_screen(all_classes)
+        delete_class_object(wanted_class_object)
 
     else:
         print("nothing was selected")

@@ -18,25 +18,29 @@ CLASS_MAPPING = {
         "class": Company,
         "get_all": "get_all_companies",
         "add_to_db": "add_company_to_db",
-        "update_in_db": "update_company_in_db"
+        "update_in_db": "update_company_in_db",
+        "delete": "delete_company_in_db"
     },
     CONTACT: {
         "class": Contact,
         "get_all": "get_all_contacts",
         "add_to_db": "add_contact_to_db",
-        "update_in_db": "update_contact_in_db"
+        "update_in_db": "update_contact_in_db",
+        "delete": "delete_contact_in_db"
     },
     RECRUITER: {
         "class": Recruiter,
         "get_all": "get_all_recruiters",
         "add_to_db": "add_recruiter_to_db",
-        "update_in_db": "update_recruiter_in_db"
+        "update_in_db": "update_recruiter_in_db",
+        "delete": "delete_recruiter_in_db"
     },
     JOB_POSTING: {
         "class": JobPosting,
         "get_all": "get_all_job_postings",
         "add_to_db": "add_job_posting_to_db",
-        "update_in_db": "update_job_posting_in_db"
+        "update_in_db": "update_job_posting_in_db",
+        "delete": "delete_job_posting_in_db"
     }
 }
 
@@ -83,6 +87,12 @@ def save_class_object(class_object):
         method_name = class_info['add_to_db']
         getattr(class_object, method_name)()
 
+
+def delete_class_object(class_object):
+    class_name = _get_class_name_from_class_instance(class_object)
+    class_info = CLASS_MAPPING[class_name]
+    method_name = class_info['delete']
+    getattr(class_object, method_name)()
 
 def show(class_type):
     """
