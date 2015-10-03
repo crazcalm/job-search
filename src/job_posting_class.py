@@ -25,6 +25,15 @@ class JobPosting(SQLModule):
         self.contact_uid = contact_uid
 
     @property
+    def date(self):
+        return self.date_applied
+
+    @date.setter
+    def date(self, value):
+        print("This is a setter!")
+        self.date_applied = value
+
+    @property
     def properties(self):
         return self.properties_with_uid[1:]
 
@@ -103,6 +112,6 @@ class JobPosting(SQLModule):
 
 
 if __name__ == "__main__":
-    test = JobPosting(link="Testing")
-    print(test)
-    test.add_job_posting_to_db()
+    test = JobPosting(link="Testing", date_applied="Today")
+    print(test.date)
+    #test.add_job_posting_to_db()
