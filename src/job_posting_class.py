@@ -17,7 +17,7 @@ class JobPosting(SQLModule):
         super().__init__()
         self.uid = uid
         self.link = link
-        self.date_applied = date_applied
+        self._date_applied = date_applied
         self.description = description
         self.interviewed = interviewed
         self.company_uid = company_uid
@@ -25,13 +25,13 @@ class JobPosting(SQLModule):
         self.contact_uid = contact_uid
 
     @property
-    def date(self):
-        return self.date_applied
+    def date_applied(self):
+        return self._date_applied
 
-    @date.setter
-    def date(self, value):
+    @date_applied.setter
+    def date_applied(self, value):
         print("This is a setter!")
-        self.date_applied = value
+        self._date_applied = value
 
     @property
     def properties(self):
