@@ -19,8 +19,10 @@ class JobPosting(SQLModule):
         super().__init__()
         self.uid = uid
         self.link = link
+        self._date_applied = None
         self.date_applied = date_applied
         self.description = description
+        self._interviewed = None
         self.interviewed = interviewed
         self.company_uid = company_uid
         self.recruiter_uid = recruiter_uid
