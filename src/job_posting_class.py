@@ -3,6 +3,8 @@ try:
 except ImportError:
     from base_classes import SQLModule
 
+from datetime import datetime
+
 
 class JobPosting(SQLModule):
     _columns = ["id", "link", "date_applied", "description", "interviewed", "companyId", "recruiterId",
@@ -17,7 +19,7 @@ class JobPosting(SQLModule):
         super().__init__()
         self.uid = uid
         self.link = link
-        self._date_applied = date_applied
+        self.date_applied = date_applied
         self.description = description
         self.interviewed = interviewed
         self.company_uid = company_uid
@@ -28,10 +30,16 @@ class JobPosting(SQLModule):
     def date_applied(self):
         return self._date_applied
 
+    # Once I now the db format for date, I can format it properly
+    # Should I use regex to validate the string?
     @date_applied.setter
     def date_applied(self, value):
-        print("This is a setter!")
+        if value:
+            year, month, day = [int(item) for item in value.split("-")]
+            date = datetime(year, month, day)
+            print("date:", date)
         self._date_applied = value
+
 
     @property
     def properties(self):
@@ -112,6 +120,6 @@ class JobPosting(SQLModule):
 
 
 if __name__ == "__main__":
-    test = JobPosting(link="Testing", date_applied="Today")
-    print(test.date)
+    test = JobPosting(link="Testing", date_applied="2015-01-19")
+    print(test.date_applied)
     #test.add_job_posting_to_db()

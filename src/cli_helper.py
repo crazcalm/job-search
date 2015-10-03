@@ -94,6 +94,7 @@ def delete_class_object(class_object):
     method_name = class_info['delete']
     getattr(class_object, method_name)()
 
+
 def show(class_type):
     """
     This function is used to get the list of all the objects in the database of a

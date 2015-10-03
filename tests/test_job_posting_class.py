@@ -14,7 +14,7 @@ class TestJobPosting(unittest.TestCase):
         self.info = {
             "uid": "",
             "link": "www.test.com",
-            "date_applied": "TIME NOW",
+            "date_applied": "2015-09-17",
             "description": "Job posting Description",
             "interviewed": "Nope",
             "company_uid": 1,

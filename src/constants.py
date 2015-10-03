@@ -116,7 +116,7 @@ RECRUITERS_DATA = [
 
 JOB_POSTING_DATA = [
     ('INSERT INTO job_posting (link, date_applied, description, interviewed, companyId,'
-     ' recruiterId, contactId) VALUES ("www.link.com", "DATE1", "Description",'
+     ' recruiterId, contactId) VALUES ("www.link.com", "2015-12-25", "Description",'
      ' "yep", 1, 1, 1);')
 ]
 
