@@ -14,7 +14,7 @@ class JobPosting(SQLModule):
     columns = tuple(_columns[1:])
     columns_with_uid = tuple(_columns)
 
-    def __init__(self, uid="", link="", date_applied="", description="", interviewed="",
+    def __init__(self, uid="", link="", date_applied="", description="", interviewed="no",
                  company_uid=None, recruiter_uid=None, contact_uid=None):
         super().__init__()
         self.uid = uid
@@ -25,6 +25,15 @@ class JobPosting(SQLModule):
         self.company_uid = company_uid
         self.recruiter_uid = recruiter_uid
         self.contact_uid = contact_uid
+
+    @property
+    def interviewed(self):
+        return self._interviewed
+
+    @interviewed.setter
+    def interviewed(self, value):
+        assert value.lower() in ("yes","no")
+        self._interviewed = value
 
     @property
     def date_applied(self):
@@ -121,5 +130,6 @@ class JobPosting(SQLModule):
 
 if __name__ == "__main__":
     test = JobPosting(link="Testing", date_applied="2015-01-19")
-    print(test.date_applied)
+    test.interviewed = "yes"
+    print(test)
     #test.add_job_posting_to_db()

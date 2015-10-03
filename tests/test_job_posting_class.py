@@ -16,7 +16,7 @@ class TestJobPosting(unittest.TestCase):
             "link": "www.test.com",
             "date_applied": "2015-09-17",
             "description": "Job posting Description",
-            "interviewed": "Nope",
+            "interviewed": "yes",
             "company_uid": 1,
             "recruiter_uid": 1,
             "contact_uid": 1

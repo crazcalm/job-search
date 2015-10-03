@@ -117,7 +117,7 @@ RECRUITERS_DATA = [
 JOB_POSTING_DATA = [
     ('INSERT INTO job_posting (link, date_applied, description, interviewed, companyId,'
      ' recruiterId, contactId) VALUES ("www.link.com", "2015-12-25", "Description",'
-     ' "yep", 1, 1, 1);')
+     ' "yes", 1, 1, 1);')
 ]
 
 DB_TEST_DATA = [COMPANY_DATA, CONTACTS_DATA, RECRUITERS_DATA, JOB_POSTING_DATA]
