@@ -75,7 +75,6 @@ class Company(SQLModule):
         # make sure tht the Company does exist in the
         assert not self.uid == ""
 
-        print(Company.columns)
         self._update_row_in_db(Company.table_name, Company.columns, self.values_with_id)
 
     def delete_company_in_db(self):
