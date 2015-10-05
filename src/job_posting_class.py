@@ -48,10 +48,9 @@ class JobPosting(SQLModule):
         if value:
             year, month, day = [int(item) for item in value.split("-")]
             date = datetime(year, month, day)
-            date = str(date).split(" ")[0]
         else:
-            date = ""
-        self._date_applied = date
+            date = datetime.now()
+        self._date_applied = str(date).split(" ")[0]
 
 
     @property
