@@ -57,7 +57,7 @@ JOB_POSTING_DB = {
     CREATE TABLE job_posting(
     id                  INTEGER PRIMARY KEY,
     link                TEXT NOT NULL DEFAULT "",
-    date_applied        TEXT NOT NULL DEFAULT "",
+    date_applied        DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     description         TEXT NOT NULL DEFAULT "",
     interviewed         TEXT NOT NULL DEFAULT "",
     companyId           INTEGER,

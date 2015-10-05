@@ -43,7 +43,7 @@ class TestJobPosting(unittest.TestCase):
     def test_properties(self):
         self.assertEqual(self.job_posting.uid, self.info["uid"])
         self.assertEqual(self.job_posting.link, self.info["link"])
-        self.assertEqual(self.job_posting.date_applied, self.info["date_applied"])
+        self.assertTrue(self.info["date_applied"] in self.job_posting.date_applied)
         self.assertEqual(self.job_posting.description, self.info["description"])
         self.assertEqual(self.job_posting.interviewed, self.info["interviewed"])
         self.assertEqual(self.job_posting.company_uid, self.info["company_uid"])
