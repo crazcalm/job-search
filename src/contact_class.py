@@ -13,7 +13,7 @@ class Contact(Person):
 
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
                  company_uid=None):
-        super().__init__(uid, first_name, last_name, email, phone, description, company_uid)
+        super(Contact, self).__init__(uid, first_name, last_name, email, phone, description, company_uid)
 
     @property
     def properties(self):

@@ -6,7 +6,7 @@ except ImportError:
     from constants import TEST_DB
 
 
-class PracticalSQL:
+class PracticalSQL(object):
     def __init__(self, db_path):
         # Note: the path might not exist yet...
         assert ";" not in db_path
@@ -22,7 +22,7 @@ class PracticalSQL:
         self.conn.close()
 
 
-class SQLModule:
+class SQLModule(object):
     def __init__(self):
         self.db = None
 
@@ -77,10 +77,11 @@ class SQLModule:
         # need to return the first item of the first tuple in the list
         return uids[0][0]
 
+
 class Person(SQLModule):
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
                  company_uid=None):
-        super().__init__()
+        super(Person, self).__init__()
         self.uid = uid
         self.first_name = first_name
         self.last_name = last_name

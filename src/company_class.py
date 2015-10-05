@@ -11,7 +11,7 @@ class Company(SQLModule):
     columns_with_uid = tuple(_columns)
 
     def __init__(self, uid="", name="", address="", website="", phone=""):
-        super().__init__()
+        super(Company, self).__init__()
         self.uid = uid
         self.name = name
         self.address = address

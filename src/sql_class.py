@@ -18,7 +18,7 @@ class SQL(PracticalSQL):
         return cls.singleton
 
     def __init__(self, db_path=TEST_DB):
-        super().__init__(db_path)
+        super(SQL, self).__init__(db_path)
 
     def create_db(self):
         for table in DB_TABLE_CREATION:

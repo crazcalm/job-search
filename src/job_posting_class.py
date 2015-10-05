@@ -16,7 +16,7 @@ class JobPosting(SQLModule):
 
     def __init__(self, uid="", link="", date_applied="", description="", interviewed="no",
                  company_uid=None, recruiter_uid=None, contact_uid=None):
-        super().__init__()
+        super(JobPosting, self).__init__()
         self.uid = uid
         self.link = link
         self._date_applied = None
