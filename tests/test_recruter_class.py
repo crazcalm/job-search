@@ -18,8 +18,7 @@ class TestRecruiter(unittest.TestCase):
             "email": "crazcalm@gmail.com",
             "phone": "111-222-3333",
             "description": "Nothing interesting",
-            "company_uid": 1,
-            "job_posting_uid": 1
+            "company_uid": 1
         }
         self.recruiter = Recruiter(
             self.info["uid"],
@@ -29,7 +28,6 @@ class TestRecruiter(unittest.TestCase):
             self.info["phone"],
             self.info["description"],
             self.info["company_uid"],
-            self.info["job_posting_uid"]
         )
 
         self.new_first_name = "Testing!!!"
@@ -47,7 +45,6 @@ class TestRecruiter(unittest.TestCase):
         self.assertEqual(self.recruiter.email, self.info["email"])
         self.assertEqual(self.recruiter.phone, self.info["phone"])
         self.assertEqual(self.recruiter.company_uid, self.info["company_uid"])
-        self.assertEqual(self.recruiter.job_posting_uid, self.info["job_posting_uid"])
 
     def test_get_all_recruiters(self):
         self.assertEqual(7, len(self.recruiter.get_all_recruiters()))

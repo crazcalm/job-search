@@ -22,7 +22,7 @@ class JobPosting(SQLModule):
         self._date_applied = None
         self.date_applied = date_applied
         self.description = description
-        self._interviewed = None
+        self._interviewed = "no"
         self.interviewed = interviewed
         self.company_uid = company_uid
         self.recruiter_uid = recruiter_uid
@@ -48,7 +48,10 @@ class JobPosting(SQLModule):
         if value:
             year, month, day = [int(item) for item in value.split("-")]
             date = datetime(year, month, day)
-        self._date_applied = str(date)
+            date = str(date).split(" ")[0]
+        else:
+            date = ""
+        self._date_applied = date
 
 
     @property
