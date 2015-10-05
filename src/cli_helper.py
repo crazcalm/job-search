@@ -161,9 +161,6 @@ def update_class(class_object, properties):
     # list of properties with
     class_properties, class_properties_references = _segregate_properties(properties)
 
-    print("class_properties:", class_properties)
-    print("class_properties_references:", class_properties_references)
-
     for prop in properties:
 
         if prop in class_properties:
