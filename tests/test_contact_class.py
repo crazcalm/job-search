@@ -30,7 +30,8 @@ class TestContact(unittest.TestCase):
             self.info["email"],
             self.info["phone"],
             self.info["description"],
-            self.info["company_uid"]
+            self.info["company_uid"],
+            testing=True
         )
 
         self.new_first_name = "Testin!!!"
@@ -68,12 +69,14 @@ class TestContact(unittest.TestCase):
     def test_update_contact_in_db(self):
         test_class = self.contact.get_a_contact(1)[0]
         test_class.first_name = self.new_first_name
+        test_class._testing = True
         test_class.update_contact_in_db()
         test_class = self.contact.get_a_contact(1)[0]
         self.assertEqual(test_class.first_name, self.new_first_name)
 
     def test_delete_contact_in_db(self):
         test_class = self.contact.get_a_contact(1)[0]
+        test_class._testing = True
         test_class.delete_contact_in_db()
         list_of_contacts = self.contact.get_all_contacts()
         self.assertEqual(len(list_of_contacts), self.total_num_of_contacts - 1)

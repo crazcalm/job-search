@@ -15,8 +15,9 @@ class Recruiter(Person):
     columns_with_uid = tuple(_column)
 
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
-                 company_uid=None):
-        super(Recruiter, self).__init__(uid, first_name, last_name, email, phone, description, company_uid)
+                 company_uid=None, testing=False):
+        super(Recruiter, self).__init__(uid, first_name, last_name, email, phone, description, company_uid,
+                                        testing=testing)
 
     @property
     def properties(self):
@@ -50,8 +51,7 @@ class Recruiter(Person):
         return [JobPosting(*item) for item in results]
 
     def get_all_recruiters(self):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
 
         query = "SELECT {} FROM {} ORDER BY id;".format(", ".join(Recruiter.columns_with_uid), Recruiter.table_name)
 
@@ -60,8 +60,8 @@ class Recruiter(Person):
         return [Recruiter(*item) for item in data]
 
     def get_a_recruiter(self, uid):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
+
         query = "SELECT {} FROM {} WHERE (id=?) ORDER BY id;".format(
             ", ".join(Recruiter.columns_with_uid), Recruiter.table_name)
 
@@ -70,15 +70,13 @@ class Recruiter(Person):
         return [Recruiter(*item) for item in data]
 
     def get_job_postings(self):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
 
         # Add logic later
         pass
 
     def add_recruiter_to_db(self):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
 
         # make sure object is not in the db
         assert self.uid == ""
@@ -89,8 +87,7 @@ class Recruiter(Person):
         self.uid = self._get_id_of_last_row(Recruiter.table_name)
 
     def update_recruiter_in_db(self):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
 
         # make sure that the object is in the db
         assert not self.uid == ""
@@ -98,11 +95,10 @@ class Recruiter(Person):
         self._update_row_in_db(Recruiter.table_name, Recruiter.columns, self.values_with_uid)
 
     def delete_recruiter_in_db(self):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
 
         # make sure that the object is in the db
-        assert  not self.uid == ""
+        assert not self.uid == ""
 
         self._delete_row_in_db(Recruiter.table_name, (self.uid,))
 
@@ -119,8 +115,4 @@ class Recruiter(Person):
             self.company_uid, len(self.job_postings))
 
 if __name__ == "__main__":
-    test = Recruiter(first_name="Marcus")
-    testing = test.get_a_recruiter(2)[0]
-    print(testing)
-    #print(testing.job_postings[0])
-
+    pass

@@ -23,7 +23,8 @@ class TestCompany(unittest.TestCase):
             self.info["name"],
             self.info["address"],
             self.info["website"],
-            self.info["phone"]
+            self.info["phone"],
+            testing=True
         )
         self.new_uid = "6"
         self.new_name = "Testing!!!"
@@ -55,12 +56,14 @@ class TestCompany(unittest.TestCase):
     def test_update_company_in_db(self):
         test_class = self.company.get_a_company(1)[0]
         test_class.name = self.new_name
+        test_class._testing = True
         test_class.update_company_in_db()
         test_class = self.company.get_a_company(1)[0]
         self.assertEqual(test_class.name, self.new_name)
 
     def test_delete_company_in_db(self):
         test_class = self.company.get_a_company(1)[0]
+        test_class._testing = True
         test_class.delete_company_in_db()
         list_of_companies = self.company.get_all_companies()
         self.assertEqual(len(list_of_companies), self.total_num_of_companies -1)

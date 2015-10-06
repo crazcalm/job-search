@@ -1,12 +1,9 @@
-import os
-import subprocess
-
 try:
     from src.base_classes import PracticalSQL
-    from src.constants import TEST_DB, DB_TABLE_CREATION, DB_TEST_DATA
+    from src.constants import REAL_DB, DB_TABLE_CREATION, DB_TEST_DATA
 except ImportError:
     from base_classes import PracticalSQL
-    from constants import TEST_DB, DB_TABLE_CREATION, DB_TEST_DATA
+    from constants import REAL_DB, DB_TABLE_CREATION, DB_TEST_DATA
 
 
 class SQL(PracticalSQL):
@@ -17,7 +14,7 @@ class SQL(PracticalSQL):
             cls.singleton = object.__new__(SQL)
         return cls.singleton
 
-    def __init__(self, db_path=TEST_DB):
+    def __init__(self, db_path=REAL_DB):
         super(SQL, self).__init__(db_path)
 
     def create_db(self):

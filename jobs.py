@@ -2,7 +2,7 @@ import argparse
 
 from src.constants import CHOICES, CHOICES_PLURAL, JOB_POSTINGS
 from src.cli_helper import print_to_screen, show, class_factory, get_all_objects_in_db, selection_screen, update_class
-from src.cli_helper import delete_class_object
+from src.cli_helper import delete_class_object, db_exist, create_db
 
 
 def main():
@@ -43,4 +43,6 @@ def main():
 
 
 if __name__ == "__main__":
+    if not db_exist():
+        create_db()
     main()

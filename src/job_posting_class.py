@@ -8,14 +8,14 @@ from datetime import datetime
 
 class JobPosting(SQLModule):
     _columns = ["id", "link", "date_applied", "description", "interviewed", "companyId", "recruiterId",
-                        "contactId"]
+                "contactId"]
 
     table_name = "job_posting"
     columns = tuple(_columns[1:])
     columns_with_uid = tuple(_columns)
 
     def __init__(self, uid="", link="", date_applied="", description="", interviewed="no",
-                 company_uid=None, recruiter_uid=None, contact_uid=None):
+                 company_uid=None, recruiter_uid=None, contact_uid=None, testing=False):
         super(JobPosting, self).__init__()
         self.uid = uid
         self.link = link
@@ -27,6 +27,7 @@ class JobPosting(SQLModule):
         self.company_uid = company_uid
         self.recruiter_uid = recruiter_uid
         self.contact_uid = contact_uid
+        self._testing = testing
 
     @property
     def interviewed(self):
@@ -74,24 +75,23 @@ class JobPosting(SQLModule):
                 self.recruiter_uid, self.contact_uid, self.uid)
 
     def get_all_job_postings(self):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
+
         query = "SELECT {} FROM {} ORDER BY id;".format(", ".join(JobPosting.columns_with_uid), JobPosting.table_name)
         data = self.db.conn.execute(query)
 
         return [JobPosting(*item) for item in data]
 
     def get_a_job_posting(self, uid):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
+
         query = "SELECT {} FROM {} WHERE (id=?) ORDER BY id;".format(", ".join(JobPosting.columns_with_uid), JobPosting.table_name)
         data = self.db.conn.execute(query, (uid,))
 
         return [JobPosting(*item) for item in data]
 
     def add_job_posting_to_db(self):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
 
         # make sure object is not in db
         assert self.uid == ""
@@ -102,8 +102,7 @@ class JobPosting(SQLModule):
         self.uid = self._get_id_of_last_row(JobPosting.table_name)
 
     def update_job_posting_in_db(self):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
 
         # make sure this object is in the db
         assert not self.uid == ""
@@ -111,8 +110,7 @@ class JobPosting(SQLModule):
         self._update_row_in_db(JobPosting.table_name, JobPosting.columns, self.values_with_uid)
 
     def delete_job_posting_in_db(self):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
 
         # make sure this object is in the db
         assert not self.uid == ""
@@ -133,7 +131,4 @@ class JobPosting(SQLModule):
 
 
 if __name__ == "__main__":
-    test = JobPosting(link="Testing", date_applied="2015-01-19")
-    test.interviewed = "yes"
-    print(test)
-    #test.add_job_posting_to_db()
+    pass

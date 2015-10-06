@@ -5,6 +5,8 @@ try:
     from src.job_posting_class import JobPosting
     from src.constants import CONTACT, COMPANY, RECRUITER, JOB_POSTING
     from src.constants import CONTACTS, COMPANIES, RECRUITERS, JOB_POSTINGS
+    from src.constants import REAL_DB
+    from src.sql_class import SQL
 except ImportError:
     from company_class import Company
     from contact_class import Contact
@@ -12,6 +14,11 @@ except ImportError:
     from job_posting_class import JobPosting
     from constants import CONTACT, COMPANY, RECRUITER, JOB_POSTING
     from constants import CONTACTS, COMPANIES, RECRUITERS, JOB_POSTINGS
+    from constants import REAL_DB
+    from sql_class import SQL
+
+import os
+
 
 CLASS_MAPPING = {
     COMPANY: {
@@ -50,6 +57,15 @@ CLASSES_PLURAL_MAPPING = {
     RECRUITERS: CLASS_MAPPING.get(RECRUITER),
     JOB_POSTINGS: CLASS_MAPPING.get(JOB_POSTING)
 }
+
+
+def create_db(db_path=REAL_DB):
+    db = SQL(db_path)
+    db.create_db()
+
+
+def db_exist(db_path=REAL_DB):
+    return os.path.exists(db_path)
 
 
 def _get_a_class_instance(class_name, uid):

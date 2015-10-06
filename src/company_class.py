@@ -1,7 +1,9 @@
 try:
     from src.base_classes import SQLModule
+    from src.constants import REAL_DB, TEST_DB
 except ImportError:
     from base_classes import SQLModule
+    from constants import REAL_DB, TEST_DB
 
 
 class Company(SQLModule):
@@ -10,13 +12,14 @@ class Company(SQLModule):
     columns = tuple(_columns[1:])
     columns_with_uid = tuple(_columns)
 
-    def __init__(self, uid="", name="", address="", website="", phone=""):
+    def __init__(self, uid="", name="", address="", website="", phone="", testing=False):
         super(Company, self).__init__()
         self.uid = uid
         self.name = name
         self.address = address
         self.website = website
         self.phone = phone
+        self._testing = testing
 
     @property
     def properties(self):
@@ -35,8 +38,7 @@ class Company(SQLModule):
         return self.name, self.address, self.website, self.phone, self.uid
 
     def get_all_companies(self):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
 
         query = "SELECT {} FROM {} ORDER BY id;".format(", ".join(Company.columns_with_uid), Company.table_name)
 
@@ -46,8 +48,7 @@ class Company(SQLModule):
 
     def get_a_company(self, uid):
         assert isinstance(uid, int)
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
 
         query = "SELECT {} FROM {} WHERE (id=?) ORDER BY id;".format(
             ", ".join(Company.columns_with_uid), Company.table_name)
@@ -57,8 +58,7 @@ class Company(SQLModule):
         return [Company(*item) for item in data]
 
     def add_company_to_db(self):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
 
         # Make sure that the Company does not already exist
         assert self.uid == ""
@@ -69,8 +69,7 @@ class Company(SQLModule):
         self.uid = self._get_id_of_last_row(Company.table_name)
 
     def update_company_in_db(self):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
 
         # make sure tht the Company does exist in the
         assert not self.uid == ""
@@ -78,8 +77,7 @@ class Company(SQLModule):
         self._update_row_in_db(Company.table_name, Company.columns, self.values_with_id)
 
     def delete_company_in_db(self):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
 
         # Make sure that the Company exists
         assert not self.uid == ""

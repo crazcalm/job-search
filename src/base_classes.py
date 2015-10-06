@@ -1,15 +1,16 @@
 import os
 import sqlite3 as sqlite
 try:
-    from src.constants import TEST_DB
+    from src.constants import REAL_DB, TEST_DB
 except ImportError:
-    from constants import TEST_DB
+    from constants import REAL_DB, TEST_DB
 
 
 class PracticalSQL(object):
     def __init__(self, db_path):
         # Note: the path might not exist yet...
         assert ";" not in db_path
+
         self.db_dir_path, self.db_name = os.path.split(db_path)
         self.db_path = os.path.abspath(db_path)
         self.conn = sqlite.connect(db_path)
@@ -26,8 +27,15 @@ class SQLModule(object):
     def __init__(self):
         self.db = None
 
-    def init_db(self, db_path=TEST_DB):
+    def _init_db(self, db_path=REAL_DB):
         self.db = PracticalSQL(db_path)
+
+    def init_db(self, testing=False):
+        if not self.db:
+            if testing:
+                self._init_db(TEST_DB)
+            else:
+                self._init_db(REAL_DB)
 
     def _update_row_in_db(self, table_name, columns, values):
         columns_string = "=?, ".join(columns) + "=? "
@@ -80,7 +88,7 @@ class SQLModule(object):
 
 class Person(SQLModule):
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
-                 company_uid=None):
+                 company_uid=None, testing=False):
         super(Person, self).__init__()
         self.uid = uid
         self.first_name = first_name
@@ -89,6 +97,7 @@ class Person(SQLModule):
         self.phone = phone
         self.description = description
         self.company_uid = company_uid
+        self._testing = testing
 
     @property
     def full_name(self):
@@ -96,8 +105,4 @@ class Person(SQLModule):
 
 
 if __name__ == "__main__":
-    test = SQLModule()
-    table_name = "table_name"
-    columns = ("id", "first_name", "last_name", "company")
-    values = (1, "Marcus", "Willock", 1)
-    #test.insert_row_into_db(table_name, columns, values)
+    pass

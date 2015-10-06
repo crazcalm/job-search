@@ -29,6 +29,7 @@ class TestRecruiter(unittest.TestCase):
             self.info["phone"],
             self.info["description"],
             self.info["company_uid"],
+            testing=True
         )
 
         self.new_first_name = "Testing!!!"
@@ -61,12 +62,14 @@ class TestRecruiter(unittest.TestCase):
     def test_update_recruiter_in_db(self):
         test_class = self.recruiter.get_a_recruiter(1)[0]
         test_class.first_name = self.new_first_name
+        test_class._testing = True
         test_class.update_recruiter_in_db()
         test_class = self.recruiter.get_a_recruiter(1)[0]
         self.assertEqual(test_class.first_name, self.new_first_name)
 
     def test_delete_recruiter_in_db(self):
         test_class = self.recruiter.get_a_recruiter(1)[0]
+        test_class._testing = True
         test_class.delete_recruiter_in_db()
         list_of_recruiters = self.recruiter.get_all_recruiters()
         self.assertEqual(len(list_of_recruiters), self.total_num_of_recruiters - 1)

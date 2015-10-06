@@ -12,8 +12,9 @@ class Contact(Person):
     columns_with_uid = tuple(_columns)
 
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
-                 company_uid=None):
-        super(Contact, self).__init__(uid, first_name, last_name, email, phone, description, company_uid)
+                 company_uid=None, testing=False):
+        super(Contact, self).__init__(uid, first_name, last_name, email, phone, description, company_uid,
+                                      testing=testing)
 
     @property
     def properties(self):
@@ -32,8 +33,7 @@ class Contact(Person):
         return self.first_name, self.last_name, self.email, self.phone, self.description, self.company_uid, self.uid
 
     def get_all_contacts(self):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
 
         query = "SELECT {} FROM {} ORDER BY id;".format(", ".join(Contact.columns_with_uid), Contact.table_name)
 
@@ -42,8 +42,7 @@ class Contact(Person):
         return [Contact(*item) for item in data]
 
     def get_a_contact(self, uid):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
 
         query = "SELECT {} FROM {} WHERE (id=?) ORDER BY id;".format(
             ", ".join(Contact.columns_with_uid), Contact.table_name)
@@ -53,8 +52,7 @@ class Contact(Person):
         return [Contact(*item) for item in data]
 
     def add_contact_to_db(self):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
 
         # make sure that the object is not in the db
         assert self.uid == ""
@@ -65,8 +63,7 @@ class Contact(Person):
         self.uid = self._get_id_of_last_row(Contact.table_name)
 
     def update_contact_in_db(self):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
 
         # making sure that the object is in the db
         assert not self.uid == ""
@@ -74,8 +71,7 @@ class Contact(Person):
         self._update_row_in_db(Contact.table_name, Contact.columns, self.values_with_uid)
 
     def delete_contact_in_db(self):
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
 
         # making sure that the object is in the db
         assert not self.uid == ""
