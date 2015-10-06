@@ -3,7 +3,6 @@ import os
 # test database
 TEST_DB = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "Databases", "test.db"))
 REAL_DB = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "Databases", "real.db"))
-SQL_FILES = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "Databases"))
 
 
 # DB creation sql statements

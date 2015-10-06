@@ -3,10 +3,10 @@ import subprocess
 
 try:
     from src.base_classes import PracticalSQL
-    from src.constants import TEST_DB, SQL_FILES, DB_TABLE_CREATION, DB_TEST_DATA
+    from src.constants import TEST_DB, DB_TABLE_CREATION, DB_TEST_DATA
 except ImportError:
     from base_classes import PracticalSQL
-    from constants import TEST_DB, SQL_FILES, DB_TABLE_CREATION, DB_TEST_DATA
+    from constants import TEST_DB, DB_TABLE_CREATION, DB_TEST_DATA
 
 
 class SQL(PracticalSQL):
