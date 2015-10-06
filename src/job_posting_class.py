@@ -46,6 +46,7 @@ class JobPosting(SQLModule):
     @date_applied.setter
     def date_applied(self, value):
         if value:
+            assert 3 == len(value.split("-"))
             year, month, day = [int(item) for item in value.split("-")]
             date = datetime(year, month, day)
         else:

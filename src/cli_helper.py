@@ -168,7 +168,10 @@ def update_class(class_object, properties):
             new_value = input("\nCurrent value of {}: {}\nEnter new value: ".format(prop, value))
 
             if new_value:
-                setattr(class_object, prop, new_value)
+                try:
+                    setattr(class_object, prop, new_value)
+                except AssertionError:
+                    print("An AssertionError was thrown. This property is being skipped.")
 
         if prop in class_properties_references:
             class_name = prop.split("_")[0]
