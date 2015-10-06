@@ -24,7 +24,11 @@ def main():
         update_class(class_object, class_object.properties)
 
     elif cli_args.show:
-        print_to_screen(show(cli_args.show))
+        objects_to_show = show(cli_args.show)
+        if objects_to_show:
+            print_to_screen(objects_to_show)
+        else:
+            print("No {} in the database. Try adding one.".format(cli_args.show))
 
     elif cli_args.update:
         class_object = class_factory(cli_args.update)
@@ -39,7 +43,11 @@ def main():
         delete_class_object(wanted_class_object)
 
     else:
-        print_to_screen(show(JOB_POSTINGS))
+        objects_to_show = show(JOB_POSTINGS)
+        if objects_to_show:
+            print_to_screen(objects_to_show)
+        else:
+            print("No jobpostings in the database. Try adding one.")
 
 
 if __name__ == "__main__":
