@@ -7,6 +7,7 @@ sys.path.insert(0, os.path.join(os.path.abspath(os.path.dirname(__file__)), ".."
 
 from src.recruiter_class import Recruiter
 from src.sql_class import SQL
+from src.constants import TEST_DB
 
 
 class TestRecruiter(unittest.TestCase):
@@ -34,7 +35,7 @@ class TestRecruiter(unittest.TestCase):
         self.total_num_of_recruiters = 7
 
         # Setting up the db
-        db = SQL()
+        db = SQL(TEST_DB)
         db.create_db()
         db.add_test_data_to_db()
 

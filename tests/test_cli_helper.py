@@ -12,7 +12,7 @@ from src.recruiter_class import Recruiter
 from src.sql_class import SQL
 from src.cli_helper import show, class_factory, get_all_objects_in_db, _segregate_properties
 from src.constants import COMPANY, COMPANIES, CONTACT, CONTACTS, RECRUITER, RECRUITERS, JOB_POSTING, JOB_POSTINGS
-
+from src.constants import TEST_DB
 
 class CliHelper(unittest.TestCase):
     def setUp(self):
@@ -22,7 +22,7 @@ class CliHelper(unittest.TestCase):
         self.prop_references = ("company_uid", "jobposting_uid", "contact_uid", "recruiter_uid", "uid")
 
         #Reset the database
-        db = SQL()
+        db = SQL(TEST_DB)
         db.create_db()
         db.add_test_data_to_db()
 

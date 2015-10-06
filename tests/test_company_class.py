@@ -7,6 +7,7 @@ sys.path.insert(0, os.path.join(os.path.abspath(os.path.dirname(__file__)), ".."
 
 from src.company_class import Company
 from src.sql_class import SQL
+from src.constants import TEST_DB
 
 
 class TestCompany(unittest.TestCase):
@@ -29,7 +30,7 @@ class TestCompany(unittest.TestCase):
         self.total_num_of_companies = 5
 
         #Reset the database
-        db = SQL()
+        db = SQL(TEST_DB)
         db.create_db()
         db.add_test_data_to_db()
 

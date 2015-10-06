@@ -7,6 +7,7 @@ sys.path.insert(0, os.path.join(os.path.abspath(os.path.dirname(__file__)), ".."
 
 from src.contact_class import Contact
 from src.sql_class import SQL
+from src.constants import TEST_DB
 
 
 class TestContact(unittest.TestCase):
@@ -36,7 +37,7 @@ class TestContact(unittest.TestCase):
         self.total_num_of_contacts = 5
 
         # Setting up the test db
-        db = SQL()
+        db = SQL(TEST_DB)
         db.create_db()
         db.add_test_data_to_db()
 

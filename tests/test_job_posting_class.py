@@ -7,6 +7,7 @@ sys.path.insert(0, os.path.join(os.path.abspath(os.path.dirname(__file__)), ".."
 
 from src.job_posting_class import JobPosting
 from src.sql_class import SQL
+from src.constants import TEST_DB
 
 
 class TestJobPosting(unittest.TestCase):
@@ -36,7 +37,7 @@ class TestJobPosting(unittest.TestCase):
         self.total_of_job_postings = 1
 
         # Setting up the DB
-        db = SQL()
+        db = SQL(TEST_DB)
         db.create_db()
         db.add_test_data_to_db()
 
