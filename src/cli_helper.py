@@ -164,6 +164,7 @@ def _segregate_properties(properties):
 
 # Need to add filtering on the properties so that
 # x,y,z properties lead to a selection screen for those class objects
+# Need to add a doc reference for assertion errors
 def update_class(class_object, properties):
     """
     This function controls the loop that updates the properties of a class.
@@ -187,7 +188,7 @@ def update_class(class_object, properties):
                 try:
                     setattr(class_object, prop, new_value)
                 except AssertionError:
-                    print("An AssertionError was thrown. This property is being skipped.")
+                    print("An AssertionError was thrown. This property is being skipped.\n")
 
         if prop in class_properties_references:
             class_name = prop.split("_")[0]
@@ -227,6 +228,7 @@ def print_to_screen(list_of_classes, verbose=False):
         print("{}: {}\n\n".format(index + 1, item))
 
 
+# Need to update docs!
 def selection_screen(list_of_classes):
     """
     This function controls the selection screen used allow the
@@ -237,16 +239,27 @@ def selection_screen(list_of_classes):
     """
     user_input = None
     while not user_input and user_input != 0:
-        print_to_screen(list_of_classes)
-        tempt = input("Enter the number of the class that you to select: ")
+        result = None
+        if list_of_classes:
+            print_to_screen(list_of_classes)
+            tempt = input("Enter the number of the class that you to select: ")
 
-        try:
-            user_input = int(tempt) - 1
-        except ValueError:
-            print("{} is not a valid input. Hit enter to continue.".format(tempt))
+            try:
+                user_input = int(tempt) - 1
+                assert user_input in range(len(list_of_classes))
+            except (ValueError, AssertionError):
+                print("{} is not a valid input. Hit enter to continue.".format(tempt))
+                input()
+
+            if user_input in range(len(list_of_classes)):
+                result = list_of_classes[user_input]
+        else:
+            print("Sorry. None exist. Try adding one.")
+            print("Hit enter to continue.")
             input()
+            break
 
-    return list_of_classes[user_input]
+    return result
 
 if __name__ == "__main__":
     test = Recruiter()
