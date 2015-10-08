@@ -24,13 +24,36 @@ class PracticalSQL(object):
 
 
 class SQLModule(object):
+    """
+    The class is used to be the connection bridge between the classes
+    used in the application and the database.
+    """
     def __init__(self):
+        """
+        Straight forward class initialization
+
+        :return: None
+        """
         self.db = None
 
     def _init_db(self, db_path=REAL_DB):
+        """
+        Initialized the database.
+
+        :param db_path: str - Path to database
+        :return: None
+        """
         self.db = PracticalSQL(db_path)
 
     def init_db(self, testing=False):
+        """
+        Initializes the database. If testing is False, then a connection to
+        the app database will be initialized. If not, a testing database will
+        be initialized.
+
+        :param testing: Boolean
+        :return: None
+        """
         if not self.db:
             if testing:
                 self._init_db(TEST_DB)
@@ -38,6 +61,14 @@ class SQLModule(object):
                 self._init_db(REAL_DB)
 
     def _update_row_in_db(self, table_name, columns, values):
+        """
+        This method provides a template for updating objects in the database.
+
+        :param table_name: str
+        :param columns: tuple
+        :param values: tuple or list
+        :return: None
+        """
         columns_string = "=?, ".join(columns) + "=? "
         query = """
         UPDATE {}
@@ -49,6 +80,14 @@ class SQLModule(object):
         self.db.conn.commit()
 
     def _insert_row_into_db(self, table_name, columns, values):
+        """
+        This method provides a template for inserting objects into the database.
+
+        :param table_name: str
+        :param columns: tuple
+        :param values: turple or list
+        :return: None
+        """
         columns_string = "(" + ", ".join(columns) + ")"
         value_placeholder = "(" + "?, " * (len(columns) - 1) + "?)"
         query = """
@@ -60,6 +99,13 @@ class SQLModule(object):
         self.db.conn.commit()
 
     def _delete_row_in_db(self, table_name, uid):
+        """
+        This method provides a template for deleting objects in the database.
+
+        :param table_name: str
+        :param uid: tuple
+        :return: None
+        """
         query = """
         DELETE FROM {}
         WHERE id=?
@@ -69,6 +115,12 @@ class SQLModule(object):
         self.db.conn.commit()
 
     def _get_id_of_last_row(self, table_name):
+        """
+        Retrieves the id of the last object in that database
+
+        :param table_name: str
+        """
+
         query = """
         SELECT id
         FROM {}
