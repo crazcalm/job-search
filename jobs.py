@@ -1,19 +1,20 @@
 import argparse
 
 from src.constants import CHOICES, CHOICES_PLURAL, JOB_POSTINGS
+from src.constants import DESCRIPTION, EPILOG, ADD_HELP, SHOW_HELP, UPDATE_HELP, DELETE_HELP
 from src.cli_helper import print_to_screen, show, class_factory, get_all_objects_in_db, selection_screen, update_class
 from src.cli_helper import delete_class_object, db_exist, create_db
 
 
 def main():
-    jobs = argparse.ArgumentParser(description="jobs", epilog="bye")
-    jobs.add_argument("-v", action="store_true", help="verbose help")
+    jobs = argparse.ArgumentParser(description=DESCRIPTION, epilog=EPILOG)
+    #jobs.add_argument("-v", action="store_true", help="verbose help")
     group = jobs.add_mutually_exclusive_group()
 
-    group.add_argument("--add", choices=CHOICES, help="add help")
-    group.add_argument("--show", choices=CHOICES_PLURAL, help="show help")
-    group.add_argument("--update", choices=CHOICES, help="update help")
-    group.add_argument("--delete", choices=CHOICES, help="delete help")
+    group.add_argument("--add", choices=CHOICES, help=ADD_HELP)
+    group.add_argument("--show", choices=CHOICES_PLURAL, help=SHOW_HELP)
+    group.add_argument("--update", choices=CHOICES, help=UPDATE_HELP)
+    group.add_argument("--delete", choices=CHOICES, help=DELETE_HELP)
 
     cli_args = jobs.parse_args()
 

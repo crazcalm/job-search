@@ -133,3 +133,22 @@ COMPANIES = "companies"
 
 CHOICES = [COMPANY, CONTACT, RECRUITER, JOB_POSTING]
 CHOICES_PLURAL = [COMPANIES, CONTACTS, RECRUITERS, JOB_POSTINGS]
+
+# CLI Documentation
+DESCRIPTION = """
+This application allows you to insert job postings into a database. Associative
+information, such as Companies, Contacts, and Recruiters, can be linked to a job posting
+by reference.
+
+By default, this application prints all job postings in the database to the screen.
+"""
+
+EPILOG = "Source code can be found at (add url)"
+
+ADD_HELP = "Add allows you to add an object to the database."
+
+SHOW_HELP = "Show prints all of selected object type to the screen."
+
+UPDATE_HELP = "Update allows you to update an object in the database."
+
+DELETE_HELP = "Delete allows you to delete an object in the database."
