@@ -7,6 +7,9 @@ except ImportError:
 
 
 class SQL(PracticalSQL):
+    """
+    This class is dedicated to creating the database.
+    """
     singleton = None
 
     def __new__(cls, *args, **kwargs):
@@ -18,12 +21,18 @@ class SQL(PracticalSQL):
         super(SQL, self).__init__(db_path)
 
     def create_db(self):
+        """
+        This method creates the tables and columns of the database.
+        """
         for table in DB_TABLE_CREATION:
             self.conn.execute(table.get("table"))
             self.conn.execute(table.get("columns"))
         self.conn.commit()
 
     def add_test_data_to_db(self):
+        """
+        This method adds various test data to the database.
+        """
         for lines in DB_TEST_DATA:
             for line in lines:
                 self.conn.execute(line)
@@ -31,6 +40,4 @@ class SQL(PracticalSQL):
 
 
 if __name__ == "__main__":
-    test = SQL()
-    test.create_db()
-    test.add_test_data_to_db()
+    pass
