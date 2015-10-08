@@ -60,11 +60,21 @@ CLASSES_PLURAL_MAPPING = {
 
 
 def create_db(db_path=REAL_DB):
+    """
+    This function creates a database.
+
+    :param db_path: str
+    """
     db = SQL(db_path)
     db.create_db()
 
 
 def db_exist(db_path=REAL_DB):
+    """
+    This function checks to see if the database exists.
+
+    :param db_path: str
+    """
     return os.path.exists(db_path)
 
 
@@ -92,6 +102,12 @@ def _get_class_name_from_class_instance(class_object):
 
 
 def save_class_object(class_object):
+    """
+    This function saves a class object.
+
+    :param class_object: Class instance of Company, Contact, Recruiter, or
+    JobPosting.
+    """
     class_name = _get_class_name_from_class_instance(class_object)
     class_info = CLASS_MAPPING[class_name]
 
@@ -105,6 +121,12 @@ def save_class_object(class_object):
 
 
 def delete_class_object(class_object):
+    """
+    This function deletes a class_object.
+
+    :param class_object: Class instance of Company, Contact, Recruiter, or
+    JobPosting.
+    """
     class_name = _get_class_name_from_class_instance(class_object)
     class_info = CLASS_MAPPING[class_name]
     method_name = class_info['delete']
@@ -262,5 +284,5 @@ def selection_screen(list_of_classes):
     return result
 
 if __name__ == "__main__":
-    test = Recruiter()
-    update_class(test, test.properties)
+    pass
+
