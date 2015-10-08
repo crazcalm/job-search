@@ -7,7 +7,16 @@ except ImportError:
 
 
 class PracticalSQL(object):
+    """
+    This class connects to the database and ensures that foreign keys
+    for sqlite3 is turned on.
+    """
     def __init__(self, db_path):
+        """
+        Initialization of the class.        
+
+        :param db_path: str - path to the database
+        """
         # Note: the path might not exist yet...
         assert ";" not in db_path
 
@@ -20,6 +29,9 @@ class PracticalSQL(object):
         self.conn.commit()
 
     def close(self):
+        """
+        This method closes the db connection.
+        """
         self.conn.close()
 
 
@@ -139,8 +151,24 @@ class SQLModule(object):
 
 
 class Person(SQLModule):
+    """
+    This class is used as a perent class to Contact and Recruiter class. As a
+    parent class, it contains the common functionality between the two classes.
+    """
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
                  company_uid=None, testing=False):
+        """
+        Initialization of the class.        
+
+        :param uid: int or empty str - db unique idetification number
+        :param first_name: str
+        :param last_name: str
+        :param email: str
+        :param phone: str
+        :param description: str
+        :param company_uid: str
+        :param testing: boolean
+        """
         super(Person, self).__init__()
         self.uid = uid
         self.first_name = first_name
@@ -153,6 +181,9 @@ class Person(SQLModule):
 
     @property
     def full_name(self):
+        """
+        Returns the full name of the person.
+        """
         return "{} {}".format(self.first_name, self.last_name)
 
 
