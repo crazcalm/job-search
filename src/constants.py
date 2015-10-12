@@ -143,11 +143,11 @@ by reference.
 By default, this application prints all job postings in the database to the screen.
 """
 
-EPILOG = "Source code can be found at (add url)"
+EPILOG = "Source code can be found at https://github.com/crazcalm/job-search"
 
 ADD_HELP = "Add allows you to add an object to the database."
 
-SHOW_HELP = "Show prints all of selected object type to the screen."
+SHOW_HELP = "Show prints all of the selected object type to the screen."
 
 UPDATE_HELP = "Update allows you to update an object in the database."
 
