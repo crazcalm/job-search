@@ -16,10 +16,13 @@
 ##Interface:
 	python3 jobs.py -h
     usage: jobs.py [-h]
-    			   [-- add {company, contact, recruiter, jobposting} | --show {companies, contacts, recruiters, jobpostings} | --update {company, contact, recruiter, jobposting} | --delete {company, contacts, recruiter, jobposting}]
+    			   [-- add {company, contact, recruiter, jobposting} |
+                   --show {companies, contacts, recruiters, jobpostings} |
+                   --update {company, contact, recruiter, jobposting} |
+                   --delete {company, contacts, recruiter, jobposting}]
 
-	This application allows you to insert job postings into a database.
-    Associative information, such as Companies, Contacts, and Recruiters, can be linked to a job posting by reference.
+	This application allows you to insert job postings into a database. Associative information,
+    such as Companies, Contacts, and Recruiters, can be linked to a job posting by reference.
     By default, this application prints all job postings in the database to the screen.
 
     optional arguments:
