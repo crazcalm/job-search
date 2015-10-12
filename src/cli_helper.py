@@ -127,10 +127,11 @@ def delete_class_object(class_object):
     :param class_object: Class instance of Company, Contact, Recruiter, or
     JobPosting.
     """
-    class_name = _get_class_name_from_class_instance(class_object)
-    class_info = CLASS_MAPPING[class_name]
-    method_name = class_info['delete']
-    getattr(class_object, method_name)()
+    if class_object:
+        class_name = _get_class_name_from_class_instance(class_object)
+        class_info = CLASS_MAPPING[class_name]
+        method_name = class_info['delete']
+        getattr(class_object, method_name)()
 
 
 def show(class_type):
