@@ -21,9 +21,10 @@
                    --update {company, contact, recruiter, jobposting} |
                    --delete {company, contacts, recruiter, jobposting}]
 
-	This application allows you to insert job postings into a database. Associative information,
-    such as Companies, Contacts, and Recruiters, can be linked to a job posting by reference.
-    By default, this application prints all job postings in the database to the screen.
+	This application allows you to insert job postings into a database. Associative
+    information, such as Companies, Contacts, and Recruiters, can be linked to a
+    job posting by reference. By default, this application prints all job postings
+    in the database to the screen.
 
     optional arguments:
     -h, --help			Show this help message and exit
