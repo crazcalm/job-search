@@ -76,8 +76,7 @@ class Recruiter(Person):
         """
         Returns a list of job postings associated with this Recruiter.
         """
-        if not self.db:
-            self.init_db()
+        self.init_db(self._testing)
 
         table_name = "job_posting"
         query = """

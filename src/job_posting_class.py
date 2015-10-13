@@ -1,7 +1,13 @@
 try:
     from src.base_classes import SQLModule
+    from src.contacts import Contact
+    from src.recruiter import Recruiter
+    from src.company import Company
 except ImportError:
     from base_classes import SQLModule
+    from contacts import Contact
+    from recruiter import Recruiter
+    from company import Company
 
 from datetime import datetime
 
@@ -130,6 +136,57 @@ class JobPosting(SQLModule):
         """
         return (self.link, self.date_applied, self.description, self.interviewed, self.company_uid,
                 self.recruiter_uid, self.contact_uid, self.uid)
+
+    @property
+    def company(self):
+        if self.company_uid:
+            self.init_db(self._testing)
+
+            table_name = "company"
+            query = """
+            SELECT *
+            FROM {}
+            WHERE id=?
+            """.format(table_name)
+
+            results = self.db.conn.execute(query, (self.company_uid,))
+            return [Company(*item) for item in results]
+        else:
+            return self.company_uid
+
+    @property
+    def contact(self):
+        if self.contact:
+            self.init_db(self._testing)
+
+            table_name = "contacts"
+            query = """
+            SELECT *
+            FROM {}
+            WHERE id=?
+            """.format(table_name)
+
+            results = self.db.conn.execute(query, (self.contact_uid,))
+            return [Contact(*item) for item in results]
+        else:
+            return self.contact_uid
+
+    @property
+    def recruiter(self):
+        if self.recruiter_uid:
+            self.init_db(self._testing)
+
+            table_name = "recruiters"
+            query = """
+            SELECT *
+            FROM {}
+            WHERE id=?
+            """.format(table_name)
+
+            results = self.db.conn.execute(query, (self.recruiter_uid,))
+            return [Recruiter(*item) for item in results]
+        else:
+            return self.recruiter_uid
 
     def get_all_job_postings(self):
         """
