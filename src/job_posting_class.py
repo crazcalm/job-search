@@ -1,13 +1,13 @@
 try:
     from src.base_classes import SQLModule
-    from src.contacts import Contact
-    from src.recruiter import Recruiter
-    from src.company import Company
+    from src.contact_class import Contact
+    from src.recruiter_class import Recruiter
+    from src.company_class import Company
 except ImportError:
     from base_classes import SQLModule
-    from contacts import Contact
-    from recruiter import Recruiter
-    from company import Company
+    from contact_class import Contact
+    from recruiter_class import Recruiter
+    from company_class import Company
 
 from datetime import datetime
 

@@ -78,5 +78,20 @@ class TestJobPosting(unittest.TestCase):
         list_of_job_postings = self.job_posting.get_all_job_postings()
         self.assertEqual(len(list_of_job_postings), self.total_of_job_postings - 1)
 
+    def test_company(self):
+        test_class = self.job_posting.get_a_job_posting(1)[0]
+        test_class._testing = True
+        self.assertTrue(test_class.company)
+
+    def test_recruiter(self):
+        test_class = self.job_posting.get_a_job_posting(1)[0]
+        test_class._testing = True
+        self.assertTrue(test_class.recruiter)
+
+    def test_contact(self):
+        test_class = self.job_posting.get_a_job_posting(1)[0]
+        test_class._testing = True
+        self.assertTrue(test_class.contact)
+
 if __name__ == "__main__":
     unittest.main()
