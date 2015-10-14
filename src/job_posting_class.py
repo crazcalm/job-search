@@ -142,7 +142,7 @@ class JobPosting(SQLModule):
             """.format(table_name)
 
             results = self.db.conn.execute(query, (self.company_uid,))
-            return [Company(*item) for item in results]
+            return [Company(*item) for item in results][0]
         else:
             return self.company_uid
 
@@ -160,7 +160,7 @@ class JobPosting(SQLModule):
             """.format(table_name)
 
             results = self.db.conn.execute(query, (self.contact_uid,))
-            return [Contact(*item) for item in results]
+            return [Contact(*item) for item in results][0]
         else:
             return self.contact_uid
 
@@ -178,7 +178,7 @@ class JobPosting(SQLModule):
             """.format(table_name)
 
             results = self.db.conn.execute(query, (self.recruiter_uid,))
-            return [Recruiter(*item) for item in results]
+            return [Recruiter(*item) for item in results][0]
         else:
             return self.recruiter_uid
 

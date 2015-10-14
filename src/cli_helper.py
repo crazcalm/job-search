@@ -190,6 +190,7 @@ def update_class(class_object, properties):
 
     # list of properties with
     class_properties, class_properties_references = _segregate_properties(properties)
+    print(properties)
 
     for prop in properties:
 
@@ -208,7 +209,7 @@ def update_class(class_object, properties):
 
             # Check to see of that property has a valid value
             if getattr(class_object, prop):
-                wanted_instance = _get_a_class_instance(class_name, getattr(class_object, prop))
+                wanted_instance = _get_a_class_instance(class_name, getattr(class_object, prop))[0]
                 print("Current {}: \n{}".format(class_name, wanted_instance))
             else:
                 wanted_instance = class_factory(class_name)
