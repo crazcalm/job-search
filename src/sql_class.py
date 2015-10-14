@@ -1,9 +1,5 @@
-try:
-    from src.base_classes import PracticalSQL
-    from src.constants import REAL_DB, DB_TABLE_CREATION, DB_TEST_DATA
-except ImportError:
-    from base_classes import PracticalSQL
-    from constants import REAL_DB, DB_TABLE_CREATION, DB_TEST_DATA
+from .base_classes import PracticalSQL
+from .constants import REAL_DB, DB_TABLE_CREATION, DB_TEST_DATA
 
 
 class SQL(PracticalSQL):

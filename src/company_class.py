@@ -1,9 +1,4 @@
-try:
-    from src.base_classes import SQLModule
-    from src.constants import REAL_DB, TEST_DB
-except ImportError:
-    from base_classes import SQLModule
-    from constants import REAL_DB, TEST_DB
+from .base_classes import SQLModule
 
 
 class Company(SQLModule):

@@ -1,7 +1,4 @@
-try:
-    from src.base_classes import SQLModule, Person
-except ImportError:
-    from base_classes import SQLModule, Person
+from .base_classes import Person
 
 
 class Contact(Person):
@@ -22,7 +19,7 @@ class Contact(Person):
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
                  company_uid=None, testing=False):
         """
-        Initialization of the class        
+        Initialization of the class
 
         :param uid: int or empty str - db unique identifier
         :param first_name: str
@@ -56,7 +53,7 @@ class Contact(Person):
     def values(self):
         """
         Returns a tuple of class property values. The order is
-        (first_name, last_name, email, phone, description, company_uid)        
+        (first_name, last_name, email, phone, description, company_uid)
         """
         return self.first_name, self.last_name, self.email, self.phone, self.description, self.company_uid
 
@@ -144,4 +141,3 @@ class Contact(Person):
 
 if __name__ == "__main__":
     pass
-

@@ -1,9 +1,4 @@
-try:
-    from src.base_classes import Person
-    from src.job_posting_class import JobPosting
-except ImportError:
-    from base_classes import Person
-    from job_posting_class import JobPosting
+from .base_classes import Person
 
 
 # Note: a recruiter can have many job postings
@@ -73,6 +68,7 @@ class Recruiter(Person):
 
     @property
     def job_postings(self):
+        from .job_posting_class import JobPosting
         """
         Returns a list of job postings associated with this Recruiter.
         """
@@ -102,7 +98,7 @@ class Recruiter(Person):
 
     def get_a_recruiter(self, uid):
         """
-        Returns a single Recruiter from the database        
+        Returns a single Recruiter from the database
 
         :param uid: int
         """

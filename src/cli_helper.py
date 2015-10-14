@@ -1,21 +1,11 @@
-try:
-    from src.company_class import Company
-    from src.contact_class import Contact
-    from src.recruiter_class import Recruiter
-    from src.job_posting_class import JobPosting
-    from src.constants import CONTACT, COMPANY, RECRUITER, JOB_POSTING
-    from src.constants import CONTACTS, COMPANIES, RECRUITERS, JOB_POSTINGS
-    from src.constants import REAL_DB
-    from src.sql_class import SQL
-except ImportError:
-    from company_class import Company
-    from contact_class import Contact
-    from recruiter_class import Recruiter
-    from job_posting_class import JobPosting
-    from constants import CONTACT, COMPANY, RECRUITER, JOB_POSTING
-    from constants import CONTACTS, COMPANIES, RECRUITERS, JOB_POSTINGS
-    from constants import REAL_DB
-    from sql_class import SQL
+from .company_class import Company
+from .contact_class import Contact
+from .recruiter_class import Recruiter
+from .job_posting_class import JobPosting
+from .constants import CONTACT, COMPANY, RECRUITER, JOB_POSTING
+from .constants import CONTACTS, COMPANIES, RECRUITERS, JOB_POSTINGS
+from .constants import REAL_DB
+from .sql_class import SQL
 
 import os
 

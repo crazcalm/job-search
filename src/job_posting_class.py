@@ -1,13 +1,4 @@
-try:
-    from src.base_classes import SQLModule
-    from src.contact_class import Contact
-    from src.recruiter_class import Recruiter
-    from src.company_class import Company
-except ImportError:
-    from base_classes import SQLModule
-    from contact_class import Contact
-    from recruiter_class import Recruiter
-    from company_class import Company
+from .base_classes import SQLModule
 
 from datetime import datetime
 
@@ -91,7 +82,7 @@ class JobPosting(SQLModule):
         This setter tries to ensure that this property will always have a
         valid value.
 
-        Vaid values are stings of the form 'yyyy-mm-dd'        
+        Vaid values are stings of the form 'yyyy-mm-dd'
         """
         if value:
             assert 3 == len(value.split("-"))
@@ -140,6 +131,7 @@ class JobPosting(SQLModule):
     @property
     def company(self):
         if self.company_uid:
+            from .company_class import Company
             self.init_db(self._testing)
 
             table_name = "company"
@@ -156,7 +148,8 @@ class JobPosting(SQLModule):
 
     @property
     def contact(self):
-        if self.contact:
+        if self.contact_uid:
+            from .contact_class import Contact
             self.init_db(self._testing)
 
             table_name = "contacts"
@@ -174,6 +167,7 @@ class JobPosting(SQLModule):
     @property
     def recruiter(self):
         if self.recruiter_uid:
+            from .recruiter_class import Recruiter
             self.init_db(self._testing)
 
             table_name = "recruiters"

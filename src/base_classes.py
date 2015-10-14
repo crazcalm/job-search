@@ -1,9 +1,7 @@
+from .constants import REAL_DB, TEST_DB
+
 import os
 import sqlite3 as sqlite
-try:
-    from src.constants import REAL_DB, TEST_DB
-except ImportError:
-    from constants import REAL_DB, TEST_DB
 
 
 class PracticalSQL(object):
@@ -13,7 +11,7 @@ class PracticalSQL(object):
     """
     def __init__(self, db_path):
         """
-        Initialization of the class.        
+        Initialization of the class.
 
         :param db_path: str - path to the database
         """
@@ -158,7 +156,7 @@ class Person(SQLModule):
     def __init__(self, uid="", first_name="", last_name="", email="", phone="", description="",
                  company_uid=None, testing=False):
         """
-        Initialization of the class.        
+        Initialization of the class.
 
         :param uid: int or empty str - db unique idetification number
         :param first_name: str
