@@ -190,7 +190,6 @@ def update_class(class_object, properties):
 
     # list of properties with
     class_properties, class_properties_references = _segregate_properties(properties)
-    print(properties)
 
     for prop in properties:
 
@@ -210,10 +209,10 @@ def update_class(class_object, properties):
             # Check to see of that property has a valid value
             if getattr(class_object, prop):
                 wanted_instance = _get_a_class_instance(class_name, getattr(class_object, prop))[0]
-                print("Current {}: \n{}".format(class_name, wanted_instance))
+                print("\n\nCurrent {}: \n{}".format(class_name, wanted_instance))
             else:
                 wanted_instance = class_factory(class_name)
-                print("Current {}: \n Is not assigned".format(class_name))
+                print("\nCurrent {}: \n Is not assigned\n".format(class_name))
 
             user_input = input("If you want to change the associated {}, enter 'YES': ".format(class_name))
 
@@ -223,6 +222,9 @@ def update_class(class_object, properties):
 
                 if selected_class:
                     setattr(class_object, prop, selected_class.uid)
+                elif selected_class == None:
+                    setattr(class_object, prop, None)
+
     print(class_object)
     save_class_object(class_object)
 
@@ -262,7 +264,9 @@ def selection_screen(list_of_classes):
                 user_input = int(tempt) - 1
                 assert user_input in range(len(list_of_classes))
             except (ValueError, AssertionError):
-                print("{} is not a valid input. Hit enter to continue.".format(tempt))
+                print("{} is not a valid input.".format(tempt))
+                print("\nIf you are updating a class, that class value is now equal to None.")
+                print("\n\nHit enter to continue")
                 input()
 
             if user_input in range(len(list_of_classes)):
