@@ -9,6 +9,13 @@
 
 ##Install
 	git clone git@github.com:crazcalm/job-search.git
+    
+##Install with installer
+	$ curl -L https://raw.githubusercontent.com/crazcalm/job-search-installer/master/installer.sh | bash
+    
+    Note: More details (including source code) for the installer can be found at
+          https://github.com/crazcalm/job-search-installer
+
 
 #Instructions:
 	python3 jobs.py -h
