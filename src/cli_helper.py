@@ -76,7 +76,7 @@ def _get_a_class_instance(class_name, uid):
         if class_name == COMPANY:
             wanted_class = class_object.get_a_company(uid)
 
-        elif class_name == Contact:
+        elif class_name == CONTACT:
             wanted_class = class_object.get_a_contact(uid)
 
         elif class_name == RECRUITER:

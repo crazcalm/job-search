@@ -142,7 +142,7 @@ class JobPosting(SQLModule):
             """.format(table_name)
 
             results = self.db.conn.execute(query, (self.company_uid,))
-            return [Company(*item) for item in results][0]
+            return [Company(*item) for item in results][0].name
         else:
             return self.company_uid
 
@@ -160,7 +160,7 @@ class JobPosting(SQLModule):
             """.format(table_name)
 
             results = self.db.conn.execute(query, (self.contact_uid,))
-            return [Contact(*item) for item in results][0]
+            return [Contact(*item) for item in results][0].full_name
         else:
             return self.contact_uid
 
@@ -178,7 +178,7 @@ class JobPosting(SQLModule):
             """.format(table_name)
 
             results = self.db.conn.execute(query, (self.recruiter_uid,))
-            return [Recruiter(*item) for item in results][0]
+            return [Recruiter(*item) for item in results][0].full_name
         else:
             return self.recruiter_uid
 
@@ -241,16 +241,17 @@ class JobPosting(SQLModule):
         self._delete_row_in_db(JobPosting.table_name, (self.uid,))
 
     def __str__(self):
+
         return """
         link: {}
         date applied: {}
         description: {}
         interviewed: {}
-        company_uid: {}
-        recruiter_uid: {}
-        contact_uid: {}""".format(
+        company: {}
+        recruiter: {}
+        contact: {}""".format(
             self.link, self.date_applied, self.description, self.interviewed,
-            self.company_uid, self.recruiter_uid, self.contact_uid)
+            self.company, self.recruiter, self.contact)
 
 
 if __name__ == "__main__":
