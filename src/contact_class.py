@@ -135,9 +135,9 @@ class Contact(Person):
         email: {}
         phone: {}
         description: {}
-        company_uid: {}""".format(
+        company: {}""".format(
             self.first_name, self.last_name, self.email, self.phone, self.description,
-            self.company_uid)
+            self.company)
 
 if __name__ == "__main__":
     pass

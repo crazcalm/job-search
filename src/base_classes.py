@@ -178,6 +178,24 @@ class Person(SQLModule):
         self._testing = testing
 
     @property
+    def company(self):
+        if self.company_uid:
+            from .company_class import Company
+            self.init_db(self._testing)
+
+            table_name = "company"
+            query = """
+            SELECT *
+            FROM {}
+            WHERE id=?
+            """.format(table_name)
+
+            results = self.db.conn.execute(query, (self.company_uid,))
+            return [Company(*item) for item in results][0].name
+        else:
+            return self.company_uid
+
+    @property
     def full_name(self):
         """
         Returns the full name of the person.

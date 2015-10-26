@@ -154,10 +154,10 @@ class Recruiter(Person):
         email: {}
         phone: {}
         description: {}
-        company_uid: {}
+        company: {}
         number of job posting: {}""".format(
             self.first_name, self.last_name, self.email, self.phone, self.description,
-            self.company_uid, len(self.job_postings))
+            self.company, len(self.job_postings))
 
 if __name__ == "__main__":
     pass
